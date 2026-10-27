@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive | Bachtiar</title>
+    <!-- Favicon Tesseract (SVG dalam format Data URI) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M 10 10 L 30 30' fill='none' stroke='%23eab308' stroke-width='8' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M 90 10 L 70 30' fill='none' stroke='%23eab308' stroke-width='8' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M 10 90 L 30 70' fill='none' stroke='%23eab308' stroke-width='8' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M 90 90 L 70 70' fill='none' stroke='%23eab308' stroke-width='8' stroke-linecap='round' opacity='0.7'/%3E%3Crect x='30' y='30' width='40' height='40' fill='none' stroke='%23eab308' stroke-width='8' stroke-linejoin='round'/%3E%3Crect x='10' y='10' width='80' height='80' fill='none' stroke='%23eab308' stroke-width='8' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <!-- Menggunakan Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome untuk Icon Media Sosial -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d131f; /* Warna latar Wuwa Flex */
+            color: #f3f4f6; /* Teks putih/abu terang */
+            scroll-behavior: smooth;
+        }
+        
+        .halaman {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .halaman.aktif {
+            display: block;
+        }
+
+        /* Styling untuk Navigasi Aktif */
+        .nav-item {
+            color: #9ca3af;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .nav-item:hover {
+            color: #eab308; /* Warna kuning emas hover */
+        }
+        
+        .nav-item.aktif {
+            color: #eab308; /* Warna aktif kuning emas */
+            font-weight: 600;
+        }
+
+        .nav-item.aktif::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #eab308;
+            border-radius: 2px;
+        }
+
+        /* Glassmorphism Navbar */
+        .glass-nav {
+            background-color: rgba(13, 19, 31, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Warna Kotak Card */
+        .card-bg {
+            background-color: #172030;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .card-bg:hover {
+            border-color: #eab308;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(234, 179, 8, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .row{display:flex;gap:2rem;align-items:flex-start;margin:1.5rem 0}
+        .row>*{flex:1;min-width:0}.row .ph{flex:0 0 40%}.row.rev{flex-direction:row-reverse}
+        .ph{background:#172030;border:1px solid #374151;border-radius:.75rem;overflow:hidden;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:.9rem;text-align:center}
+        /* Mengubah perilaku gambar agar proporsional dan kotaknya tidak kebesaran */
+        .ph {
+            background: #172030;
+            border: 1px solid #374151;
+            border-radius: .75rem;
+            overflow: hidden;
+            aspect-ratio: 3/2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: .9rem;
+            text-align: center;
+            max-width: 250px; /* Batasi maksimal lebar kotak gambar */
+            padding: 1rem; /* Tambahkan jarak aman (padding) di dalam kotak */
+        }
+        
+        .ph img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ubah 'cover' menjadi 'contain' agar gambar tidak terpotong */
+        }
+        
+        .ph.sq {
+            aspect-ratio: 1/1;
+        }
+        .ph.ic{flex:none!important;width:12rem}.ph.ic2{flex:none!important;width:6rem}.ph.qr{flex:none!important;width:16rem}
+        .eq{font-family:'Times New Roman',serif;font-style:italic}
+        .fab{position:fixed;right:1.5rem;bottom:1.5rem;width:56px;height:56px;border-radius:9999px;border:0;background:#eab308;color:#0d131f;font-size:1.5rem;cursor:pointer;z-index:60;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+        #kom{position:fixed;right:1.5rem;top:5.5rem;bottom:6.5rem;width:min(280px,calc(100vw - 3rem));background:rgba(23,32,48,.97);border:1px solid #374151;border-radius:1.5rem;padding:1rem;display:none;flex-direction:column;z-index:60;font-size:.85rem}
+        #kom.open{display:flex}#kl{flex:1;overflow:auto}
+        .c{margin-bottom:.9rem}.c p{margin:.1rem 0;color:#d1d5db}
+        .av{display:inline-block;width:24px;height:24px;border-radius:9999px;background:#eab308;color:#0d131f;font-weight:700;text-align:center;line-height:24px;font-size:.7rem;margin-right:.4rem}
+        #kb{text-align:center}#kb button{background:#eab308;color:#0d131f;font-weight:600;border-radius:9999px;padding:.3rem 1rem}
+        #kb input{width:100%;background:#0d131f;border:1px solid #374151;border-radius:.5rem;padding:.4rem .6rem;margin-bottom:.4rem;color:#f3f4f6}
+        @media(max-width:768px){.row,.row.rev{flex-direction:column}.row .ph{flex:none;width:100%}}
+
+        /* --- Tambahan CSS untuk 3 Slide Beranda --- */
+        html {
+            scroll-snap-type: y mandatory;
+        }
+        
+        .slide {
+            /* Tinggi layar dikurangi tinggi navbar (pt-28 = 7rem) */
+            min-height: calc(100vh - 7rem); 
+            scroll-snap-align: start;
+            scroll-margin-top: 7rem; /* Menghentikan guliran pas di bawah navbar */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        /* --- Akhir Tambahan CSS --- */
+    </style>
+</head>
+<body class="antialiased min-h-screen">
+
+    <!-- STICKY GLASSMORPHISM NAVBAR -->
+    <nav class="glass-nav fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Identitas Kiri (Berfungsi sebagai tombol Home) -->
+            <button onclick="pindahHalaman('beranda', 'nav-beranda')" class="text-xl font-extrabold tracking-wider text-white hover:text-[#eab308] transition">
+                BACHTIAR BARRA.
+            </button>
+
+            <!-- Menu Kanan -->
+            <div class="flex space-x-6 text-sm md:text-base font-medium" id="menu-navigasi">
+                <button id="nav-beranda" onclick="pindahHalaman('beranda', 'nav-beranda')" class="nav-item aktif hidden md:block">Beranda</button>
+                <button id="nav-matematika" onclick="pindahHalaman('matematika', 'nav-matematika')" class="nav-item">Matematika</button>
+                <button id="nav-entertainment" onclick="pindahHalaman('entertainment', 'nav-entertainment')" class="nav-item">Entertainment</button>
+                <button id="nav-kontak" onclick="pindahHalaman('kontak', 'nav-kontak')" class="nav-item">Kontak</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- KONTEN UTAMA -->
+    <main class="max-w-6xl mx-auto px-6 pt-28 pb-20">
+
+        <!-- ================= HALAMAN BERANDA ================= -->
+        <section id="beranda" class="halaman aktif">
+            
+            <!-- SLIDE 1: UCAPAN SELAMAT DATANG -->
+            <div class="slide">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-12 w-full">
+                    <div class="w-full md:w-1/2">
+                        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+                            Selamat Datang.<br>
+                            <span class="text-3xl md:text-5xl font-semibold text-gray-400 mt-2 block">Ini adalah arsip saya.</span>
+                        </h1>
+                    </div>
+                    <div class="w-full md:w-1/2 flex justify-end">
+                        <div class="card-bg w-full md:w-[400px] h-[300px] rounded-xl flex items-center justify-center overflow-hidden">
+                            <img src="image/archive.webp" alt="Ilustrasi" class="w-full h-full object-cover opacity-70">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: HIGHLIGHT MATEMATIKA -->
+            <div class="slide">
+                <div class="text-center mb-10 w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] inline-block border-b-4 border-[#eab308] pb-2">Highlight Matematika</h2>
+                    <p class="text-gray-400 mt-3 text-lg">Eksplorasi karya dan perangkat pembelajaran matematika.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                    <button onclick="tampilDetailKarya('mathra')" class="card-bg h-48 rounded-xl flex flex-col items-center justify-center text-xl font-bold p-4 text-center hover:text-[#eab308]">
+                        Mathra-Cages
+                        <span class="text-sm font-normal text-gray-400 mt-2">Trading Card Game Fisik</span>
+                    </button>
+                    <button onclick="tampilDetailKarya('tcg')" class="card-bg h-48 rounded-xl flex flex-col items-center justify-center text-xl font-bold p-4 text-center hover:text-[#eab308]">
+                        TCG Matematika
+                        <span class="text-sm font-normal text-gray-400 mt-2">Game Web Interaktif</span>
+                    </button>
+                    <button onclick="keBawahPerangkat()" class="card-bg h-48 rounded-xl flex flex-col items-center justify-center text-xl font-bold text-center px-4 hover:text-[#eab308]">
+                        Perangkat<br>Pembelajaran
+                        <span class="text-sm font-normal text-gray-400 mt-2">LKPD & Modul Ajar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: HIGHLIGHT ENTERTAINMENT -->
+            <div class="slide relative">
+                <div class="text-center mb-10 w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] inline-block border-b-4 border-[#eab308] pb-2">Highlight Entertainment</h2>
+                    <p class="text-gray-400 mt-3 text-lg">Sisi lain dari arsip ini, berisi hobi dan hal-hal random.</p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8 w-full">
+                    <!-- Games -->
+                    <div class="w-full md:w-1/2 flex flex-col">
+                        <h3 class="text-2xl font-bold text-white mb-4 border-l-4 border-[#eab308] pl-3">🎮 Games</h3>
+                        <div class="card-bg p-6 rounded-xl text-md text-gray-300 flex-1">
+                            Bagian ini berisi tentang beberapa game yang telah saya mainkan. Tersedia pengenalan game, info akun, dan fun fact.
+                            <button onclick="pindahHalaman('entertainment', 'nav-entertainment')" class="mt-4 text-[#eab308] font-bold hover:underline block">Lihat Koleksi Game &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- Random -->
+                    <div class="w-full md:w-1/2 flex flex-col">
+                        <h3 class="text-2xl font-bold text-white mb-4 border-l-4 border-[#eab308] pl-3">📸 Random</h3>
+                        <div class="card-bg p-6 rounded-xl text-md text-gray-300 flex-1">
+                            Bagian ini berisi tentang beberapa hal-hal random yang saya abadikan. Baik berupa foto maupun tulisan yang memiliki cerita unik.
+                            <button onclick="pindahHalaman('entertainment', 'nav-entertainment')" class="mt-4 text-[#eab308] font-bold hover:underline block">Jelajahi Momen &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kontak Singkat -->
+                <div class="card-bg p-4 rounded-xl flex flex-wrap justify-center gap-8 text-gray-300 w-full mt-8">
+                    <a data-l="ig" href="#" class="hover:text-[#eab308] font-medium flex items-center gap-3">
+                        <i class="fa-brands fa-instagram text-2xl"></i> Instagram
+                    </a>
+                    <a data-l="wa" href="#" class="hover:text-[#eab308] font-medium flex items-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i> WhatsApp
+                    </a>
+                    <a data-l="fb" href="#" class="hover:text-[#eab308] font-medium flex items-center gap-3">
+                        <i class="fa-brands fa-facebook text-2xl"></i> Facebook
+                    </a>
+                    <!-- Menambahkan Discord di Beranda -->
+                    <a data-l="dc" href="#" class="hover:text-[#eab308] font-medium flex items-center gap-3">
+                        <i class="fa-brands fa-discord text-2xl"></i> Discord
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= HALAMAN MATEMATIKA ================= -->
+        <!-- ================= HALAMAN MATEMATIKA ================= -->
+        <section id="matematika" class="halaman">
+            
+            <!-- SLIDE 1: TENTANG PERMAINAN -->
+            <div class="slide">
+                <div class="w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] mb-10 text-center md:text-left">Permainan</h2>
+                    
+                    <div class="space-y-6">
+                       <!-- TCG Math -->
+                        <div class="card-bg p-6 rounded-xl flex flex-col md:flex-row gap-8 items-center cursor-pointer" onclick="tampilDetailKarya('tcg')">
+                            <div class="w-full md:w-1/3 h-40 bg-[#0d131f] rounded-lg flex items-center justify-center border border-gray-700 relative overflow-hidden group-hover:border-[#eab308] transition">
+                                <img src="image/tcg_icon.webp" alt="TCG" class="absolute w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <h3 class="text-2xl font-bold mb-3 hover:text-[#eab308] transition">Math Trading Card</h3>
+                                <p class="text-gray-400">Integrasi soal matematika dengan sistem permainan trading-card game. Latih kemampuan materi transformasimu untuk mengalahkan lawan!</p>
+                            </div>
+                        </div>
+
+                        <!-- Mathra Cages -->
+                        <div class="card-bg p-6 rounded-xl flex flex-col md:flex-row gap-8 items-center cursor-pointer" onclick="tampilDetailKarya('mathra')">
+                            <div class="w-full md:w-1/3 h-40 bg-[#0d131f] rounded-lg flex items-center justify-center border border-gray-700 relative overflow-hidden group-hover:border-[#eab308] transition">
+                                <img src="image/mathra_icon.webp" alt="Mathra Cages" class="absolute w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <h3 class="text-2xl font-bold mb-3 hover:text-[#eab308] transition">Mathra-Cages</h3>
+                                <p class="text-gray-400">Integrasi permainan fisik Trading Card Game dengan sistem berbasis website. Duel bersama temanmu untuk mendapatkan skor akhir yang memuaskan!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: PERANGKAT PEMBELAJARAN -->
+            <!-- Memindahkan id="perangkat" ke bagian slide agar scroll otomatis dari tombol di beranda tetap bekerja -->
+            <div class="slide" id="perangkat">
+                <div class="w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] mb-10 text-center md:text-left">Perangkat Pembelajaran</h2>
+                    
+                    <!-- Grid Perangkat Pembelajaran -->
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="font-bold text-xl mb-4 border-b border-gray-700 pb-2">LKPD</div>
+                        <div class="font-bold text-xl mb-4 border-b border-gray-700 pb-2">Modul Ajar</div>
+                        <div class="font-bold text-xl mb-4 border-b border-gray-700 pb-2">Soal Asesmen</div>
+
+                        <!-- Fase D -->
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase D</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase D</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase D</button>
+
+                        <!-- Fase E -->
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase E</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase E</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase E</button>
+
+                        <!-- Fase F -->
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase F</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase F</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase F</button>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- ================= HALAMAN ENTERTAINMENT UTAMA ================= -->
+        <section id="entertainment" class="halaman">
+            
+            <!-- SLIDE 1: GAMES -->
+            <div class="slide">
+                <div class="w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] mb-10 text-center md:text-left">Games</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- FGO -->
+                        <button onclick="bukaSubGame('fgo')" class="card-bg aspect-square md:aspect-auto md:h-64 rounded-xl flex flex-col items-center justify-center p-6 gap-4 hover:text-[#eab308] transition group">
+                            <img src="image/fgo_icon.webp" alt="F/GO" class="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-2xl font-bold">F/GO</span>
+                        </button>
+                        <!-- HSR -->
+                        <button onclick="bukaSubGame('hsr')" class="card-bg aspect-square md:aspect-auto md:h-64 rounded-xl flex flex-col items-center justify-center p-6 gap-4 hover:text-[#eab308] transition group">
+                            <img src="image/hsr_icon.webp" alt="HSR" class="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-2xl font-bold">HSR</span>
+                        </button>
+                        <!-- WUWA -->
+                        <button onclick="bukaSubGame('wuwa')" class="card-bg aspect-square md:aspect-auto md:h-64 rounded-xl flex flex-col items-center justify-center p-6 gap-4 hover:text-[#eab308] transition group">
+                            <img src="image/wuwa_icon.webp" alt="WUWA" class="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-2xl font-bold">WUWA</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: RANDOM -->
+            <div class="slide">
+                <div class="w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] mb-10 text-center md:text-left">Random</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Foto -->
+                        <button onclick="bukaRandom('foto')" class="card-bg h-48 md:h-64 rounded-xl flex items-center justify-center overflow-hidden relative group">
+                            <img src="image/foto_icon.webp" alt="Foto" class="absolute w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500">
+                            <span class="relative text-3xl font-bold z-10 group-hover:text-[#eab308] transition">Foto</span>
+                        </button>
+                        <!-- Tulisan -->
+                        <button onclick="bukaRandom('tulisan')" class="card-bg h-48 md:h-64 rounded-xl flex items-center justify-center overflow-hidden relative group">
+                            <img src="image/tulisan_icon.webp" alt="Tulisan" class="absolute w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500">
+                            <span class="relative text-3xl font-bold z-10 group-hover:text-[#eab308] transition">Tulisan</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+
+        <!-- ================= DETAIL GAME: F/GO ================= -->
+        <section id="game-fgo" class="halaman">
+            <button onclick="pindahHalaman('entertainment', 'nav-entertainment')" class="text-[#eab308] hover:text-white mb-6 font-bold flex items-center gap-2">
+                ← Kembali ke Games
+            </button>
+            
+            <div class="flex flex-col md:flex-row gap-10 items-start">
+                <img src="image/fgo_icon.webp" class="w-48 h-48 rounded-3xl shadow-lg">
+                <div class="flex-1">
+                    <h2 class="text-4xl font-extrabold mb-2">Fate/Grand Order</h2>
+                    <h3 class="text-xl text-gray-400 mb-6 border-b border-gray-700 pb-4">LASENGLE / TYPE-MOON</h3>
+                    
+                    <!-- Sub-Navigasi Dalam Game -->
+                    <div class="flex gap-4 mb-6 border-b border-gray-700 pb-2">
+                        <button onclick="switchTabFgo('pengenalan')" id="btn-fgo-pengenalan" class="text-[#eab308] font-bold">Pengenalan</button>
+                        <button onclick="switchTabFgo('akun')" id="btn-fgo-akun" class="text-gray-500 hover:text-white">Info Akun</button>
+                        <button onclick="switchTabFgo('funfact')" id="btn-fgo-funfact" class="text-gray-500 hover:text-white">Funfact</button>
+                    </div>
+
+                    <!-- Konten Pengenalan -->
+                    <div id="fgo-pengenalan" class="text-gray-300 leading-relaxed text-lg">
+                        <p class="mb-4">Fate/Grand Order adalah game RPG gacha seluler dari seri Fate untuk Android dan iOS yang dikembangkan oleh LASENGLE (sebelumnya DELIGHTWORKS), diterbitkan oleh Aniplex, dan dilisensikan oleh TYPE-MOON. Awalnya dirilis di Jepang pada 2015. Game ini adalah RPG berbasis giliran (turn-based) dengan segmen cerita bergaya visual novel.</p>
+                        <p>Sampai saat ini, F/GO masih eksis dan mampu bersaing dengan game tipe gacha lainnya. Kekuatannya selama 11 tahun terus didukung oleh komunitas yang besar. Terlepas dari kejayaannya tersebut, F/GO dinilai playernya sebagai game yang cukup "pelit". Bagaimana tidak, untuk mendapatkan satu karakter bintang 5 baru dijamin pada pull ke-330.</p>
+                    </div>
+
+                    <!-- Konten Info Akun -->
+                    <div id="fgo-akun" class="hidden text-gray-300">
+                        <img src="image/fgo_akun.webp" class="w-full rounded-xl mb-6 shadow-md border border-gray-700">
+                        <p class="mb-2">Berikut adalah informasi mengenai akun saya:</p>
+                        <ul class="list-disc ml-5 mb-4 text-[#eab308]">
+                            <li><span class="text-gray-300">Nickname: tiarrr</span></li>
+                            <li><span class="text-gray-300">Level: 140</span></li>
+                            <li><span class="text-gray-300">ID: 283,164,915</span></li>
+                        </ul>
+                        <p>Akun ini berada pada server JP sehingga hanya bisa berteman pada akun dengan server yang sama. Hampir sulit dipercaya di game yang memiliki pity hingga menyentuh 330 pull ini, akun saya diberikan banyak karakter limited.</p>
+                    </div>
+
+                    <!-- Konten Funfact List -->
+                    <div id="fgo-funfact" class="hidden space-y-4">
+                        <!-- Kotak Funfact 1 yang bisa diklik -->
+                        <button onclick="bukaFunfactDetail('fgo-easteregg')" class="card-bg w-full text-left p-6 rounded-xl flex gap-6 items-center">
+                            <img src="image/thumbnail_fgo_1.webp" class="w-24 h-24 rounded-lg object-cover">
+                            <div>
+                                <span class="text-sm font-bold text-gray-500 mb-1 block">FFF/G01</span>
+                                <h4 class="text-xl font-bold text-[#eab308] mb-2">Easter Egg di Balik Animasi sang Jenius</h4>
+                                <p class="text-gray-400 text-sm">James Moriarty, musuh bebuyutan Sherlock Holmes, ternyata menyimpan hal menarik di animasi Noble Phantasmnya!</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DETAIL FUNFACT: MORIARTY (FGO) ================= -->
+        <section id="funfact-fgo-easteregg" class="halaman">
+            <button onclick="bukaSubGame('fgo')" class="text-[#eab308] hover:text-white mb-6 font-bold flex items-center gap-2">
+                ← Kembali ke Daftar Funfact F/GO
+            </button>
+
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-extrabold mb-6">Easter Egg di Balik Animasi sang Jenius</h2>
+                
+                <div class="relative w-full overflow-hidden rounded-xl" style="padding-top: 56.25%;">
+    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/q-pxm0nz1zE?si=T9HNMRpySbJjLJ3l" frameborder="0" allowfullscreen></iframe>
+</div>
+                
+                <p class="text-gray-300 text-lg leading-relaxed mb-6">Reaksi pertama ketika melihat animasi Noble Phantasm dari karakter James Moriarty: Ruler, tentunya sedikit (atau mungkin banyak) kaget. Bagaimana tidak, animasinya malah menampilkan persamaan dan rumus matematika. Akan tetapi, sejujurnya hal ini cukup bisa diwajari mengingat dalam literatur karya Sir Arthur Conan Doyle, James Moriarty memang digambarkan sebagai seorang akedimisi jenius, terlepas dari sifat buruknya.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <img src="image/fgo_funfact_1a.webp" class="rounded-xl w-full border border-gray-700">
+                    <img src="image/fgo_funfact_1b.webp" class="rounded-xl w-full border border-gray-700 bg-white">
+                </div>
+
+                <p class="text-gray-300 text-lg leading-relaxed mb-6">Setelah diamati lebih lanjut, ditemukanlah satu persamaan yang cukup unik. Jika kita mencoba untuk memasukkan persamaan ini ke dalam aplikasi GeoGebra untuk menggambar grafik, maka akan tampak gambar seperti di atas. Siapa sangka, di balik kecerdasan dan kelicikannya, ia memiliki cara tersendiri untuk mengekspresikan perasaannya.</p>
+            </div>
+        </section>
+
+        <!-- ================= HALAMAN DINAMIS (detail karya, game, random) ================= -->
+        <section id="dinamis" class="halaman"></section>
+
+        <!-- ================= HALAMAN KONTAK ================= -->
+        <section id="kontak" class="halaman text-center py-20">
+            <h2 class="text-4xl font-extrabold text-[#eab308] mb-4">Mari Terhubung!</h2>
+            <p class="text-xl text-gray-400 mb-12">Temukan saya di berbagai platform di bawah ini.</p>
+            <div class="flex justify-center gap-8">
+                <!-- Instagram -->
+                <a data-l="ig" target="_blank" rel="noopener" href="#" class="w-16 h-16 bg-[#172030] rounded-full flex items-center justify-center hover:bg-[#eab308] hover:text-[#0d131f] transition shadow border border-gray-700 text-3xl">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <!-- WhatsApp -->
+                <a data-l="wa" target="_blank" rel="noopener" href="#" class="w-16 h-16 bg-[#172030] rounded-full flex items-center justify-center hover:bg-[#eab308] hover:text-[#0d131f] transition shadow border border-gray-700 text-3xl">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <!-- Facebook -->
+                <a data-l="fb" target="_blank" rel="noopener" href="#" class="w-16 h-16 bg-[#172030] rounded-full flex items-center justify-center hover:bg-[#eab308] hover:text-[#0d131f] transition shadow border border-gray-700 text-3xl">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <!-- Discord -->
+                <a data-l="dc" target="_blank" rel="noopener" href="#" class="w-16 h-16 bg-[#172030] rounded-full flex items-center justify-center hover:bg-[#eab308] hover:text-[#0d131f] transition shadow border border-gray-700 text-3xl">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <button class="fab" id="fab" aria-label="Komentar" hidden>💬</button>
+    <aside id="kom"><div id="kl"></div><div id="kb"></div></aside>
+
+    <!-- SCRIPT JAVASCRIPT UNTUK SPA (Single Page Application) -->
+    <script>
+        // Fungsi utama untuk pindah halaman dari Navbar
+        function pindahHalaman(idHalaman, idTombol) {
+            if(window.setKom) setKom(null, []);
+            // Sembunyikan semua section (.halaman)
+            document.querySelectorAll('.halaman').forEach(el => el.classList.remove('aktif'));
+            
+            // Tampilkan section yang dituju
+            document.getElementById(idHalaman).classList.add('aktif');
+
+            // Reset warna semua tombol navigasi
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('aktif'));
+            
+            // Warnai tombol navigasi yang sedang aktif (jika ada idTombol)
+            if(idTombol) {
+                document.getElementById(idTombol).classList.add('aktif');
+            }
+            
+            // Scroll otomatis ke paling atas setiap pindah halaman
+            window.scrollTo(0, 0);
+        }
+
+        // Fungsi untuk Navigasi Tab di Dalam Halaman F/GO
+        function switchTabFgo(tabId) {
+            // Sembunyikan semua tab konten FGO
+            document.getElementById('fgo-pengenalan').classList.add('hidden');
+            document.getElementById('fgo-akun').classList.add('hidden');
+            document.getElementById('fgo-funfact').classList.add('hidden');
+            
+            // Reset style semua tombol tab FGO
+            document.getElementById('btn-fgo-pengenalan').className = "text-gray-500 hover:text-white";
+            document.getElementById('btn-fgo-akun').className = "text-gray-500 hover:text-white";
+            document.getElementById('btn-fgo-funfact').className = "text-gray-500 hover:text-white";
+
+            // Tampilkan konten yang dipilih dan beri warna kuning pada tombolnya
+            document.getElementById('fgo-' + tabId).classList.remove('hidden');
+            document.getElementById('btn-fgo-' + tabId).className = "text-[#eab308] font-bold";
+            setKom(tabId === 'funfact' ? 'f-fgo' : null, GAME.fgo.kom);
+        }
+
+        // Fungsi untuk buka detail bacaan Funfact khusus
+        function bukaFunfactDetail(idFunfact) {
+            document.querySelectorAll('.halaman').forEach(el => el.classList.remove('aktif'));
+            document.getElementById('funfact-' + idFunfact).classList.add('aktif');
+            window.scrollTo(0, 0);
+        }
+
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script>
+/* ===== PENGATURAN ===== */
+const FB_CONFIG = null; // GANTI dengan objek config Firebase (apiKey, authDomain, projectId, ...). Biarkan null = mode demo.
+const LINKS = {
+  tcg:'https://tinyurl.com/cxpxazwf', mathra:'https://tinyurl.com/2jsyc55h',
+  wa:'https://wa.me/6287719758337', fb:'https://www.facebook.com/share/1FAeGkhWF3/', ig:'https://www.instagram.com/rmdhn_tiar',
+  dc:'https://discord.com/users/787212255619579904', yt:'#' /* GANTI dengan link video Noble Phantasm Moriarty */
+};
+/* Semua gambar dibaca dari folder gambar/ . Jika file belum ada, muncul kotak kosong. */
+const IMG=(f,c='')=>`<div class="ph ${c}"><img src="image/${f}" alt="" onerror="this.remove()"></div>`;
+const SOON='<p>Konten segera hadir.</p>';
+
+/* ===== DATA ===== */
+const KARYA={
+ tcg:{t:'TCG Matematika',img:'tcg_logo.webp',
+  intro:['TCG (<i>Transformation Card Game</i>) Matematika adalah salah satu media pembelajaran yang saya dan teman-teman saya buat pada semester 3. Media ini merupakan luaran dari Mata Kuliah Media Pembelajaran Matematika. Media TCG Matematika memadukan soal-soal matematika, terutama materi transformasi jenjang SMA ke dalam basis permainan TCG. Sistem dari permainan ini adalah <i>single player</i> melawan komputer.','TCG Matematika tidak diciptakan untuk pemahaman konsep siswa. Media ini ditujukan untuk <i>drill</i> / latihan soal guna meningkatkan abstraksi siswa terhadap materi transformasi. Sebagai salah satu luaran dari Mata Kuliah, media ini tentunya masih banyak kekurangan. Oleh karena itu, <i>feedback</i> dari beberapa pengguna pastinya akan sangat bermanfaat untuk keberlanjutan media ini selanjutnya.'],
+  cara:['Pemain masuk ke website lalu menekan “Masuki Petualangan”','Setelah tampilan berubah, klik “Start Game”','Pemain akan menarik 5 kartu dari deck sebagai awalan.','Pada setiap awal giliran, pemain bisa menarik satu kartu dari deck.','Setelah menarik kartu, pemain memilih kartu yang akan digunakan, baik kartu soal maupun spell untuk ditaruh di tempatnya.','Setelah memilih, pemain menekan “Set Phase” untuk menyelesaikan (menginput jawaban) soal pada kartu soal.','Setelah jawaban disimpan oleh sistem, pemain menekan “Battle Phase”. Jawaban pemain akan ditentukan benar salahnya. Jika benar, maka ATK dari kartu soal yang dipilih akan menjadi serangan ke lawan. Akan tetapi, jika salah, akan berbalik ke diri sendiri.','Setelah perhitungan serangan, tekan “End Phase” untuk mengakhiri giliran dan biarkan lawan (komputer) melakukan giliran.','Permainan akan berakhir ketika salah satu nyawa berkurang menjadi 0.'],
+  lead:'Alur permainan dari TCG Matematika adalah sebagai berikut:',link:'Untuk bermain TCG Matematika ini, silakan <i>scan</i> QR-<i>code</i> berikut atau akses <i>link</i> di bawahnya.',
+  kom:['Min <i>request</i> mode multiplayer dong biar seru lawan temen.','Medianya keren min, coba kasih variasi soal atau <i>update</i> berkala gitu.','Susah banget soalnya min, coba kasih kemudahan dikit lahh.']},
+ mathra:{t:'Mathra-Cages',img:'mathra_logo.webp',
+  intro:['Mathra-Cages adalah salah satu media yang saya dan teman-teman saya ciptakan untuk pembelajaran matematika. Media ini merupakan salah satu luaran dari Mata Kuliah <i>Edupreneur in Mathematics</i>. Mathra-Cages mengintegrasikan permainan fisik <i>Trading Card Game</i> dengan sistem web sebagai “wasit” untuk mengatur jalannya pertandingan. Media ini membutuhkan dua pemain yang akan melawan satu sama lain. Tentunya, dalam permainannya, pemain dituntut untuk menyelesaikan soal matematika guna meresolusi setiap efeknya.','Sama seperti TCG Matematika, Mathra-Cages juga tidak dibuat untuk penanaman konsep. Media ini merupakan salah satu alternatif untuk latihan-latihan soal. Mengingat media ini diperjualbelikan, umpan balik dari pembeli sangat diperlukan untuk kebaruan dari media ini.'],
+  cara:['Pemain menyusun deck yang terdiri dari 25 kartu.','Kedua pemain melakukan suit. Pemenangnya dapat memilih ingin bermain pada giliran pertama atau kedua.','Pada giliran pertama, pemain hanya bisa meletakkan kartu bidak di field, tidak bisa menyerang, namun tetap bisa mengaktifkan spell.','Untuk mengaktifkan kartu, pemain bisa melakukan scan QR-code pada kartu atau menginput id kartu.','Setiap memanggil kartu bidak, pemain harus menjawab soal matematika agar efek dari kartu teresolusi.','Setelah selesai meletakkan dan menggunakan spell, pemain mengakhiri giliran pertama.','Ketika giliran kedua, pemain pada giliran ini sudah bisa menyerang setelah memanggil bidak.','Pemain bebas menentukan bidak mana yang akan diserang. Perhitungan nilai serangan akan berdasarkan nilai ATK setiap kartu. Jika salah satu ATK-nya lebih kecil, maka kartu tersebut akan hancur. Jika pemain tidak memiliki kartu bidak, lawan bisa melakukan serangan langsung.','Setelah menyerang, pemain kedua mengakhiri gilirannya dan beralih ke pemain pertama.','Permainan terus berlanjut hingga salah satu nyawa pemain mencapai 0.'],
+  lead:'Alur permainan dari Mathra-Cages adalah sebagai berikut:',link:'Untuk pembelian Mathra-Cages ini, silakan <i>scan</i> QR-<i>code</i> berikut atau akses <i>link</i> di bawahnya.',
+  kom:['Minn, ini pembeliannya via shopee aja kah? Tokped gaada yaa?','Ditunggu kedatangan barangnya minn, udah ga sabar buat duel.','Jangan ngasih soal terlalu <i>random</i> minn, gabisa ditebak inii.']}
+};
+const GAME={
+ fgo:{t:'Fate/Grand Order',s:'F/GO',img:'fgo.jpg',
+  intro:['Fate/Grand Order adalah game RPG <i>gacha</i> seluler dari seri Fate untuk Android dan iOS yang dikembangkan oleh LASENGLE (sebelumnya DELiGHTWORKS), diterbitkan oleh Aniplex, dan dilisensikan oleh TYPE-MOON. Awalnya dirilis di Jepang pada 2015. Game ini adalah RPG berbasis giliran (<i>turn-based</i>) dengan segmen cerita bergaya visual novel yang menyatukan jajaran karakter dari berbagai karya seri Fate, karya TYPE-MOON lainnya. Cerita dari game ini juga telah diadaptasi ke dalam beberapa manga, film animasi, dan serial animasi.','Sampai saat ini, F/GO masih eksis dan mampu bersaing dengan game tipe <i>gacha</i> lainnya. Kekuatannya selama 11 tahun terus didukung oleh komunitas yang besar. Terlepas dari kejayaannya tersebut, F/GO dinilai playernya sebagai game yang cukup “pelit”. Bagaimana tidak, untuk mendapatkan satu karakter bintang 5 baru dijamin pada <i>pull</i> ke-330.'],
+  info:['Nickname: tiarrr','Level: 140','ID: 283,164,915'],infoImg:'fgo_akun.webp',
+  infoP:'Akun ini berada pada server JP sehingga hanya bisa berteman pada akun dengan server yang sama. Hampir sulit dipercaya di <i>game</i> yang memiliki <i>pity</i> hingga menyentuh 330 <i>pull</i> ini, akun saya diberikan banyak karakter <i>limited</i>.',
+  fun:[['FFF/G01','<i>Easter Egg</i> di Balik Animasi sang Jenius','James Moriarty, musuh bebuyutan Sherlock Holmes, ternyata menyimpan hal menarik di animasi Noble Phantasmnya!','fgo-f1.png'],['FFF/G02','Cerita Original dan Terpanjang','Lostbelt 6: Avalon Le Fae, ternyata ditulis langsung oleh Kinoko Nasu dan skripnya sangat banyak!','fgo-f2.png']],
+  kom:['Menurut kalian bakal ada <i>easter egg</i> yang lain ngga di animasi Moriarty?','Kayanya ada, cuman ngga spesifik kaya gambar hati itu deh.','Ada kok, itu yang e pangkat pi juga salah satu persamaan terkenal di matematika.'],
+  det:[
+    // ---- DETAIL FUNFACT PERTAMA (Moriarty) ----
+    `<div class="row">
+        <a class="ph" href="${LINKS.yt}">▶ Video Noble Phantasm<br>(isi link YouTube di LINKS.yt)</a>
+        <p style="text-align:justify">Tulis paragraf pengantar atau penjelasan utama untuk Funfact pertama di sini...</p>
+     </div>
+     <p style="text-align:justify">Tulis penjelasan atau analisis lanjutan di paragraf ini...</p>
+     <div class="row">${IMG('fgo-moriarty.png')}${IMG('fgo-geogebra.png')}</div>`,
+
+    // ---- TEMPLAT UNTUK FUNFACT KEDUA (Silakan isi di sini) ----
+    `<div class="row">
+        <!-- Anda bisa mengganti bagian ini dengan foto, video, atau deskripsi -->
+        ${IMG('NAMA_FILE_GAMBAR_2.png', 'sq')}
+        <p style="text-align:justify">
+            Tuliskan paragraf penjelasan utama atau cerita mengenai funfact kedua di sini. 
+            Misalnya penjelasan mendalam mengenai Lostbelt 6: Avalon Le Fae, latar belakang penulisannya, 
+            atau detail menarik lainnya yang ingin Anda arsipkan.
+        </p>
+     </div>
+     <p style="text-align:justify">
+        Tambahkan paragraf kedua jika penjelasan Anda cukup panjang dan membutuhkan ruang baca yang nyaman.
+     </p>
+     <div class="row">
+        <!-- Jika ingin memasukkan dua gambar berdampingan seperti di bawah -->
+        ${IMG('GAMBAR_TAMBAHAN_1.png')}
+        ${IMG('GAMBAR_TAMBAHAN_2.png')}
+     </div>`
+  ]},
+ hsr:{t:'Honkai: Star Rail',s:'HSR',img:'hsr.jpg',
+  intro:['Honkai: Star Rail adalah permainan video <i>role play</i> yang dikembangkan oleh Mihoyo. Permainan ini dirilis pada 26 April 2023 untuk Windows dan perangkat seluler. Honkai: Star Rail mengikuti gaya alur permainan dari RPG klasik Jepang, pemain membangun barisan karakter dan mengontrol tim beranggotakan empat orang dalam pertarungan <i>turn based</i>. Selain berbagai statistik yang memengaruhi kekuatan karakter, setiap karakter mempunyai peran tempur mereka (<i>Path</i>) dan serangkaian kemampuan unik yang disebut <i>Traces</i> dalam pertarungan.','Permainan ini berlatarkan alam semesta fantasi sains di mana umat manusia mengikuti (<i>Path</i>) makhluk tertentu yang disebut Aeon. Karakter pemain, Trailblazer, yang nama dan jenis kelaminnya dipilih oleh pemain, terbangun tanpa ingatan mereka di atas stasiun luar angkasa dan menemukan bahwa mereka dijiwai dengan Stellaron, entitas kosmik yang mengganggu. Dalam upaya untuk menemukan asal-usul mereka dan menghilangkan ancaman Stellaron yang tersisa, Trailblazer berangkat dengan kru Astral Express.'],
+  info:['Nickname: tiarrr','Level: 70','UID: 834855975'],infoImg:'hsr-akun.jpg',
+  infoP:'Akun ini berada pada server SEA. Meski akun ini sudah cukup lama, saya masih memiliki sedikit karakter <i>limited</i> pada game ini. Seringnya, saya mengincar untuk membuat tim baru.<br><br>Saya cukup menikmati permainan ini secara kasual dan tetap memutuskan untuk menjadi <i>free to play player</i>. Tidak terlalu mengejar konten-konten <i>end game</i>. Asalkan tetap bisa menikmati perkembangan ceritanya saja sudah cukup.',
+  fun:[['FFHSR01','Siklus Pengulangan yang Sempurna','Siklus pengulangan (<i>looping</i>) yang dilakukan oleh Phainon pada <i>Main Quest</i> 3.4 ternyata menyimpan informasi menarik seputar matematika!','hsr-f1.png'],['FFHSR02','Pesan Tersirat yang Ingin Disampaikan','Trailer karakter baru, Cyrene pada versi 3.7 menampilkan kode yang menarik untuk diulik lebih lanjut!','hsr-f2.png']],
+  kom:['Di sini aku bener-bener <i>respect</i> sama Phainon atas pengorbanannya...','Setuju banget, <i>speechless</i> ...','Pengejaran api adalah perjalanan yang penuh kehilangan di dalamnya.'],
+  det:[`<div class="row">${IMG('hsr-siklus.png')}<p style="text-align:justify">Bagi pemain yang telah menyelesaikan <i>Trailblazer Quest</i> pada versi 3.4, pasti dibuat terpukau oleh kebenaran salah satu karakter Chrysos Heirs, Phainon. Salah satu kejutan yang diberi oleh penulis cerita adalah fakta bahwa Phainon telah melewati siklus pengulangan abadi sebanyak 33.550.336 kali. Pengulangan tersebut dilakukan untuk mencegah kebangkitan Irontomb sampai sang pahlawan dari luar datang. Akan tetapi, apa alasan di balik dipilihnya bilangan 33.550.336 sebagai siklus pengulangan yang dialami oleh Phainon? Mungkin, jawabannya adalah bilangan sempurna.</p></div>
+   <div class="row rev">${IMG('hsr-sempurna.png')}<p style="text-align:justify">Bilangan sempurna adalah bilangan bulat positif yang nilainya sama dengan jumlah seluruh pembagi sejati positifnya (tidak termasuk bilangan itu sendiri). Sebagai contoh, bilangan sempurna pertama adalah 6. Mudah diketahui bahwa faktor sejati dari 6 adalah 1, 2 dan 3. Jumlah dari semua faktor sejatinya adalah 6. Inilah yang dimaksud dari bilangan sempurna.<br><br>Dilansir dari Wolfram MathWorld, gambar di samping adalah bilangan sempurna ke-1 sampai ke-5. Bilangan 33.550.336 menempati posisi ke-5 sebagai bilangan sempurna. Mungkin, penulis cerita ingin mengatakan bahwa 33.550.336 siklus yang dilalui oleh Phainon merupakan jumlah yang “sempurna” untuk penulisan karakternya.</p></div>`,SOON]},
+ wuwa:{t:'Wuthering Waves',s:'WUWA',img:'wuwa.jpg',
+  intro:['Wuthering Waves adalah permainan RPG aksi yang dikembangkan dan diterbitkan oleh Kuro Games yang dirilis pada 22 Mei 2024. Wuthering Waves berlatarkan dunia <i>post-apocalypse</i> futuristik setelah bencana yang disebut <i>Lament</i> memusnahkan sebagian besar umat manusia dan menyebabkan munculnya makhluk dan monster yang disebut Tacet Discords. Umat manusia harus segera beradaptasi dengan ancaman tersebut dan membangun kembali peradabannya. Cerita dari permainan ini mengikuti Rover yang amnesia dan berangkat menjelajahi dunia baru.','Wuthering Waves merupakan permainan <i>open world</i>. Pemain mengontrol protagonis, Rover serta karakter yang disebut Resonator. Resonator dibagi menjadi 2 jenis kelangkaan, yaitu bintang 4 dan bintang 5. Sistem pertarungan di dalam permainan ini menampilkan keterampilan Intro dan Outro setiap karakternya. Permainan ini juga memuat sistem <i>gacha</i> yang disebut Convenes. Convenes dibagi menjadi dua jenis, Convenes senjata dan Resonator.'],
+  info:['Nickname: tiarrr','Level: 60','UID: 905508571'],infoImg:'wuwa-akun.jpg',
+  infoP:'Akun ini berada pada server SEA. Akun ini juga terbilang cukup baru, mengingat baru dimainkan di tahun 2025. Akan tetapi, akun ini cukup beruntung karena sering mendapat karakter <i>limited</i>.<br><br>Penyampaian cerita di Wuthering Waves memang sangat menggiurkan, terlepas dari esensi ceritanya. Itulah yang menjadi nilai tambahan pada permainan ini. Sangat disayangkan, pada beberapa perangkat, permainan ini tidak terlalu bisa dimainkan secara optimal.',
+  fun:[['FFWUWA01','Referensi yang Tiada Batas','Fitur <i>achievement</i> pada Wuthering Waves memiliki referensi yang menarik untuk dibahas mulai dari anime, lagu, hingga kata-kata!','wuwa-f1.png'],['FFWUWA02','Satu dari Sekian Penyesalan Rover','Rover, salah satu karakter yang dinilai nyaris sempurna, ternyata mengakui penyesalannya!','wuwa-f2.png']],
+  kom:['Wuwa gapernah kehabisan buat memberi referensi gini sih.','Kadang referensinya membuka luka lama wkwkw.','Bayangin aja lagi enak enak eksplor tiba tiba <i>achievement</i> Amanojaku wkwk.'],
+  det:[`<div class="row">${IMG('wuwa-ach1.png')}<p style="text-align:justify">Sebagai salah satu game RPG, Wuwa pastinya akan menyajikan fitur <i>achievements</i> yang berisi hadiah-hadiah setelah player melakukan hal-hal tertentu. Bagian yang menarik dalam fitur ini adalah bagaimana cara developer untuk menyampaikan “selamat” pada <i>player</i>. Developer dengan sengaja memasukkan <i>achievement</i> yang berhubungan dengan <i>franchise</i> luar. Contoh mudahnya adalah gambar di samping tentang <i>achievement fly me to the moon</i>.</p></div>
+   <div class="row rev">${IMG('wuwa-ach2.png')}<p style="text-align:justify"><i>Fly Me to the Moon</i> adalah salah satu lagu yang ditulis pada tahun 1954. Lagu ini juga merupakan lagu penutup dari Series Anime Neon Genesis Evangelion.<br><br>Tidak hanya itu, Wuthering Waves cukup banyak memasukkan referensi dari <i>franchise</i> lain, seperti pada gambar di samping. Mulai dari <i>The Storm That Is Approaching</i> yang merupakan lagu dari <i>game</i> Devil May Cry 5, <i>Five Night at Plushie’s</i> yang merupakan plesetan dari <i>Five Night at Freddy’s</i>, hingga “<i>Zoltraak</i>” yang merupakan sihir sekaligus lagu yang ada pada anime Frieren: Journey’s End. Wuthering Waves konsisten untuk menambahkan referensi seperti ini di setiap <i>update</i>. Barangkali, inovasi ini dilakukan oleh developer untuk menggaet beberapa fandom agar tertarik bermain <i>game</i> mereka.</p></div>`,SOON]}
+};
+const FOTO=[['Jejeran Pinus','F01','foto1.jpg',['Objek foto: Pohon pinus & langit pagi','Tanggal Pengambilan: 30 Agustus 2026','Tempat Pengambilan: Bumi Perkemahan Bedengan'],'Foto ini diambil ketika kami berenam liburan ke Bedengan. Suasana di pagi hari yang cukup menenangkan dengan kilauan cahaya yang indah berpadu di sana. Jejeran pohon pinus yang tertata cukup menarik perhatian seakan-akan meminta untuk diabadikan. Mungkin, hasilnya tidak sebagus itu, tetapi cukup untuk mengarsipkan suasana yang damai.',['Fotonya bagus banget minn, pake kamera apa inii?','Suasananya adem yaa, sejuk banget dilihat-lihat.','Kemarin banget habis ke situ sama teman-teman, emang paling cocok untuk <i>healing</i>.']],['Judul foto 2','F02','foto2.jpg',[],SOON,[]],['Judul foto 3','F03','foto3.jpg',[],SOON,[]]];
+const TULIS=[['<i>Jastrow’s Illusion</i>','T01','tulisan1.jpg',`<div class="row">${IMG('tulisan1.jpg','sq')}<div style="text-align:justify"><p>Tahukah kalian bahwa gambar bagian atas dan bagian bawah adalah gambar yang sama? Sekilas, mungkin gambar bagian atas menampilkan 2 bagian kue yang besarnya berbeda. Namun, ketika keduanya ditumpuk, ternyata besarnya sama! Inilah yang disebut sebagai Ilusi Jastrow.</p><p>Ilusi Jastrow adalah ilusi geometris klasik, sebuah variasi kecil dari versi yang pertama kali dijelaskan oleh Joseph Jastrow pada tahun 1891. Jastrow sendiri menyatakan:<br>“Ukuran bagian atas tampak jelas lebih besar, karena sisi panjangnya disandingkan secara kontras dengan sisi yang lebih pendek dari bagian lainnya. Dalam menilai sebuah luasan (area), kita tidak dapat menghindari untuk memperhitungkan panjang garis-garis yang membatasi luasan tersebut, dan perbedaan (kontras) pada panjang garis-garis ini akan memengaruhi bagaimana kita membandingkan luasan tersebut. Kita menilai segala sesuatu secara relatif, bahkan ketika kita memiliki keinginan kuat untuk menilai secara mutlak.”</p></div></div>`,['Tipuan sederhana kaya gini ternyata ada penjelasan yang cukup ribet yaa.','Inget banget kasus ini di DC wkwkwk. Perkara kue doang loh.','Selalu tertarik sama info-info <i>random</i> kaya gini. Seolah oleh bikin “oh ternyata sesuatu yang sederhana bisa kelihatan rumit ya”.']],['Judul tulisan 2','T02','tulisan2.jpg',SOON,[]],['Judul tulisan 3','T03','tulisan3.jpg',SOON,[]]];
+const NAMES=['sylilya3134','kirana9832','reyza2130'];
+
+
+/* ===== HALAMAN TAMBAHAN DARI PDF ===== */
+const $=id=>document.getElementById(id);
+const BTN=(f,t)=>`<button onclick="${f}" class="text-[#eab308] hover:text-white mb-6 font-bold flex items-center gap-2">← ${t}</button>`;
+const H2='text-4xl font-extrabold text-[#eab308] mb-6';
+const TAB=(a,on,fn)=>`<div class="flex gap-4 mb-6 border-b border-gray-700 pb-2">${a.map(([k,t])=>`<button onclick="${fn}'${k}')" class="${on==k?'text-[#eab308] font-bold':'text-gray-500 hover:text-white'}">${t}</button>`).join('')}</div>`;
+function tampil(html,nav,kom){
+  $('dinamis').innerHTML=`<div class="text-gray-300 text-lg leading-relaxed">${html}</div>`;
+  pindahHalaman('dinamis',nav); if(kom) setKom(kom[0],kom[1]);
+}
+function keBawahPerangkat(){pindahHalaman('matematika','nav-matematika');const e=$('perangkat');if(e)e.scrollIntoView({behavior:'smooth'})}
+
+function tampilDetailKarya(k,t='pengenalan'){
+  const d=KARYA[k]; let c;
+  if(t=='pengenalan') c=`<div class="row">${IMG(d.img,'sq')}<p class="text-justify">${d.intro[0]}</p></div><p class="text-justify">${d.intro[1]}</p>`;
+  else if(t=='caramain') c=`<p class="mb-4">${d.lead}</p><ol class="list-decimal ml-6 space-y-2 text-justify">${d.cara.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+  else c=`<div class="flex flex-col items-center gap-4 text-center"><p>${d.link}</p>${IMG('qr_'+k+'.webp','sq qr')}<a class="card-bg rounded-lg px-4 py-2 underline" href="${LINKS[k]}" target="_blank" rel="noopener">${LINKS[k]}</a></div>`;
+  tampil(BTN("pindahHalaman('matematika','nav-matematika')",'Kembali ke Permainan')+`<h2 class="${H2}">${d.t}</h2>`+TAB([['pengenalan','Pengenalan'],['caramain','Cara Bermain'],['link','<i>Link</i> Permainan']],t,`tampilDetailKarya('${k}',`)+c,'nav-matematika',t=='link'?['k-'+k,d.kom]:null);
+}
+
+const funBtn=(n,f,i)=>`<button onclick="bukaFunfact('${n}',${i+1})" class="card-bg w-full text-left p-6 rounded-xl flex gap-6 items-center">${IMG(f[3],'sq ic2')}<div><span class="text-sm font-bold text-gray-500 mb-1 block">${f[0]}</span><h4 class="text-xl font-bold text-[#eab308] mb-2">${f[1]}</h4><p class="text-gray-400 text-sm">${f[2]}</p></div></button>`;
+$('fgo-funfact').insertAdjacentHTML('beforeend',funBtn('fgo',GAME.fgo.fun[1],1)); // FFF/G02 menyusul FFF/G01 yang sudah ada
+
+function bukaSubGame(n,t){
+  if(n==='fgo'&&!t){pindahHalaman('game-fgo','nav-entertainment');switchTabFgo('pengenalan');return}
+  gamePage(n,t||'pengenalan');
+}
+function gamePage(n,t){
+  const g=GAME[n]; let c;
+  if(t=='pengenalan') c=g.intro.map(p=>`<p class="mb-4 text-justify">${p}</p>`).join('');
+  else if(t=='info') c=IMG(g.infoImg)+`<p class="mt-6 mb-2">Berikut adalah informasi mengenai akun saya:</p><ul class="list-disc ml-5 mb-4 text-[#eab308]">${g.info.map(x=>`<li><span class="text-gray-300">${x}</span></li>`).join('')}</ul><p class="text-justify">${g.infoP}</p>`;
+  else c=`<div class="space-y-4">${g.fun.map((f,i)=>funBtn(n,f,i)).join('')}</div>`;
+  tampil(BTN("pindahHalaman('entertainment','nav-entertainment')",'Kembali ke Games')+`<div class="flex flex-col md:flex-row gap-10 items-start">${IMG(g.img,'sq ic')}<div class="flex-1 min-w-0"><h2 class="text-4xl font-extrabold mb-4">${g.t}</h2>`+TAB(gameTabs,t,`bukaSubGame('${n}',`)+c+`</div></div>`,'nav-entertainment',t=='funfact'?['f-'+n,g.kom]:null);
+}
+const gameTabs=[['pengenalan','Pengenalan'],['info','Info Akun'],['funfact','Funfact']];
+function balik(n){ if(n==='fgo'){bukaSubGame('fgo');switchTabFgo('funfact')} else gamePage(n,'funfact') }
+function bukaFunfact(n,i){
+  const g=GAME[n],f=g.fun[i-1];
+  tampil(BTN(`balik('${n}')`,'Kembali ke Daftar Funfact '+g.s)+`<div class="max-w-4xl mx-auto"><h2 class="text-3xl font-extrabold text-white mb-6">${f[1]}</h2>${g.det[i-1]}</div>`,'nav-entertainment');
+}
+
+function bukaRandom(j){
+  const L=j=='foto'?FOTO:TULIS;
+  tampil(BTN("pindahHalaman('entertainment','nav-entertainment')",'Kembali')+`<h2 class="${H2}">${j=='foto'?'Foto':'Tulisan'}</h2><div class="grid grid-cols-1 md:grid-cols-3 gap-6">${L.map((x,i)=>`<button onclick="bukaRandomDetail('${j}',${i})" class="card-bg rounded-xl p-4 text-center">${IMG(x[2],'sq')}<span class="block mt-3 text-xl font-bold">${x[1]}</span></button>`).join('')}</div>`,'nav-entertainment');
+}
+function bukaRandomDetail(j,i){
+  const back=BTN(`bukaRandom('${j}')`,'Kembali');
+  if(j=='foto'){const x=FOTO[i];
+    tampil(back+`<h2 class="${H2}">${x[0]}</h2><div class="row">${IMG(x[2])}<div><p class="text-sm text-gray-400 mb-4">${x[3].join('<br>')}</p><p class="text-justify">${x[4]}</p></div></div>`,'nav-entertainment',x[5].length?['foto'+i,x[5]]:null);
+  } else {const x=TULIS[i];
+    tampil(back+`<h2 class="${H2}">${x[0]}</h2>${x[3]}`,'nav-entertainment',x[4].length?['tulisan'+i,x[4]]:null);
+  }
+}
+
+/* ===== KOMENTAR & LOGIN GOOGLE ===== */
+let ckey=null,csample=[],user=null,db=null;
+document.querySelectorAll('[data-l]').forEach(a=>a.href=LINKS[a.dataset.l]);
+function setKom(k,s){ckey=k;csample=s||[];$('fab').hidden=!k;$('kom').classList.remove('open')}
+if(FB_CONFIG){firebase.initializeApp(FB_CONFIG);db=firebase.firestore();firebase.auth().onAuthStateChanged(u=>{user=u?{name:u.displayName||u.email}:null;drawKom()})}
+function login(){
+  if(FB_CONFIG) return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(e=>alert('Login gagal: '+e.message));
+  user={name:'pengguna-demo'};drawKom(); // mode demo (tanpa Firebase)
+}
+function logout(){FB_CONFIG?firebase.auth().signOut():(user=null,drawKom())}
+const saved=()=>{try{return JSON.parse(localStorage['k:'+ckey]||'[]')}catch(e){return[]}};
+async function drawKom(){
+  if(!ckey) return;
+  const mine=db?(await db.collection('komentar').where('halaman','==',ckey).get()).docs.map(d=>d.data()).sort((x,y)=>x.waktu-y.waktu):saved();
+  const esc=s=>String(s).replace(/[<>&]/g,m=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[m]));
+  $('kl').innerHTML=csample.map((t,i)=>`<div class="c"><span class="av">${NAMES[i][0].toUpperCase()}</span>${NAMES[i]}<p>${t}</p></div>`).join('')+mine.map(m=>`<div class="c"><span class="av">${esc(m.nama)[0].toUpperCase()}</span>${esc(m.nama)}<p>${esc(m.teks)}</p></div>`).join('');
+  $('kb').innerHTML=user?`<input id="ki" placeholder="Tulis komentar..." maxlength="300"><button id="ks">Kirim</button> <button id="ko" style="background:none;color:#9ca3af;font-weight:400;text-decoration:underline">Keluar</button>`:`<p class="mb-2">Masuk untuk berkomentar</p><button id="kl2">Login dengan Google</button>`;
+  if(user){
+    $('ks').onclick=async()=>{const v=$('ki').value.trim();if(!v)return;const d={halaman:ckey,nama:user.name,teks:v,waktu:Date.now()};
+      if(db) await db.collection('komentar').add(d); else {const a=saved();a.push(d);localStorage['k:'+ckey]=JSON.stringify(a)} drawKom()};
+    $('ko').onclick=logout;
+  } else $('kl2').onclick=login;
+}
+$('fab').onclick=()=>{$('kom').classList.toggle('open');drawKom()};
+    </script>
+</body>
+</html>

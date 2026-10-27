@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive | Bachtiar</title>
+    <!-- Favicon Tesseract (SVG dalam format Data URI) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M 10 10 L 30 30' fill='none' stroke='%23eab308' stroke-width='8' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M 90 10 L 70 30' fill='none' stroke='%23eab308' stroke-width='8' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M 10 90 L 30 70' fill='none' stroke='%23eab308' stroke-width='8' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M 90 90 L 70 70' fill='none' stroke='%23eab308' stroke-width='8' stroke-linecap='round' opacity='0.7'/%3E%3Crect x='30' y='30' width='40' height='40' fill='none' stroke='%23eab308' stroke-width='8' stroke-linejoin='round'/%3E%3Crect x='10' y='10' width='80' height='80' fill='none' stroke='%23eab308' stroke-width='8' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <!-- Menggunakan Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome untuk Icon Media Sosial -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d131f; /* Warna latar Wuwa Flex */
+            color: #f3f4f6; /* Teks putih/abu terang */
+            scroll-behavior: smooth;
+            /* MULAI LATAR POLA MATEMATIKA: hapus deklarasi background-image dan background-size di bawah untuk menghilangkannya. */
+            background-image:
+                linear-gradient(rgba(13, 19, 31, .45), rgba(13, 19, 31, .45)),
+                linear-gradient(rgba(234, 179, 8, .12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(234, 179, 8, .12) 1px, transparent 1px),
+                radial-gradient(circle at 1px 1px, rgba(234, 179, 8, .22) 1.5px, transparent 0);
+            background-size: auto, 40px 40px, 40px 40px, 40px 40px;
+            /* AKHIR LATAR POLA MATEMATIKA. */
+        }
+        
+        .halaman {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .halaman.aktif {
+            display: block;
+        }
+
+        /* Styling untuk Navigasi Aktif */
+        .nav-item {
+            color: #9ca3af;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .nav-item:hover {
+            color: #eab308; /* Warna kuning emas hover */
+        }
+        
+        .nav-item.aktif {
+            color: #eab308; /* Warna aktif kuning emas */
+            font-weight: 600;
+        }
+
+        .nav-item.aktif::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #eab308;
+            border-radius: 2px;
+        }
+
+        /* Glassmorphism Navbar */
+        .glass-nav {
+            background-color: rgba(13, 19, 31, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Warna Kotak Card */
+        .card-bg {
+            background-color: #172030;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .card-bg:hover {
+            border-color: #eab308;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(234, 179, 8, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .row {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            margin: 1.5rem 0;
+        }
+
+        .row > * {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .row > .native-size-image {
+            flex: 0 1 auto;
+            width: auto;
+            max-width: 40%;
+            height: auto;
+            object-fit: contain;
+            border-radius: .75rem;
+        }
+
+        .row.image-text-row {
+            display: flow-root;
+        }
+
+        .row.image-text-row > .native-size-image {
+            float: left;
+            margin: 0 1rem .5rem 0;
+        }
+
+        .row.rev.image-text-row > .native-size-image {
+            float: right;
+            margin: 0 0 .5rem 1rem;
+        }
+
+        .row.image-text-row > p {
+            margin: 0;
+        }
+
+        .row .ph {
+            flex: 0 0 40%;
+        }
+
+        .row.rev {
+            flex-direction: row-reverse;
+        }
+
+        /* Mengubah perilaku gambar agar proporsional dan kotaknya tidak kebesaran */
+        .ph {
+            background: #172030;
+            border: 1px solid #374151;
+            border-radius: .75rem;
+            overflow: hidden;
+            aspect-ratio: 3/2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: .9rem;
+            text-align: center;
+            max-width: 250px; /* Batasi maksimal lebar kotak gambar */
+            padding: 1rem; /* Tambahkan jarak aman (padding) di dalam kotak */
+        }
+
+        .ph img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ubah 'cover' menjadi 'contain' agar gambar tidak terpotong */
+        }
+
+        .ph.sq {
+            aspect-ratio: 1 / 1;
+        }
+
+        .ph.photo-thumb {
+            width: 100%;
+            max-width: none;
+            padding: 0;
+        }
+
+        .ph.photo-thumb img {
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .row .ph.writing-image {
+            flex: 0 1 auto;
+            width: fit-content;
+            max-width: min(40%, 18rem);
+            height: auto;
+            aspect-ratio: auto;
+            padding: .5rem;
+            align-self: flex-start;
+        }
+
+        .ph.writing-image img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 28rem;
+            object-fit: contain;
+        }
+
+        .photo-carousel {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .photo-carousel-track {
+            display: flex;
+            flex: 1;
+            min-width: 0;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: .5rem 0 1rem;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .photo-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .photo-carousel-card {
+            flex: 0 0 calc((100% - 3rem) / 3);
+            scroll-snap-align: start;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .photo-carousel-label {
+            display: block;
+            margin-top: .5rem;
+            padding: .25rem;
+            border-radius: .75rem;
+            background: #1f2937;
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 900px) {
+            .photo-carousel-card {
+                flex-basis: calc((100% - 1.5rem) / 2);
+            }
+        }
+
+        .photo-carousel-arrow {
+            display: flex;
+            flex: none;
+            width: 3.5rem;
+            height: 3.5rem;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background: #1f2937;
+            color: #f3f4f6;
+            font-size: 1.5rem;
+            transition: color .2s, background-color .2s;
+        }
+
+        .photo-carousel-arrow:hover {
+            background: #eab308;
+            color: #0d131f;
+        }
+
+        @media (max-width: 640px) {
+            .photo-carousel {
+                gap: .5rem;
+            }
+
+            .photo-carousel-arrow {
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.1rem;
+            }
+
+            .photo-carousel-card {
+                flex-basis: 100%;
+            }
+        }
+
+        .row .ph.photo-detail {
+            flex: 0 1 40%;
+            width: 40%;
+            max-width: 32rem;
+            aspect-ratio: auto;
+            padding: 0;
+            margin-inline: auto;
+        }
+
+        .ph.photo-detail img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .ph.ic {
+            flex: none !important;
+            width: 12rem;
+            padding: 0;
+        }
+
+        .ph.ic img {
+            object-fit: cover;
+        }
+
+        .ph.ic2 {
+            flex: none !important;
+            width: 6rem;
+            padding: 0;
+        }
+
+        .ph.ic2 img {
+            object-fit: cover;
+        }
+
+        .ph.qr {
+            flex: none !important;
+            width: 16rem;
+        }
+
+        .eq {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
+
+        .fab {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            width: 56px;
+            height: 56px;
+            border: 0;
+            border-radius: 9999px;
+            background: #eab308;
+            color: #0d131f;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 60;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .5);
+        }
+
+        #kom {
+            position: fixed;
+            right: 1.5rem;
+            top: 5.5rem;
+            bottom: 6.5rem;
+            width: min(280px, calc(100vw - 3rem));
+            background: rgba(23, 32, 48, .97);
+            border: 1px solid #374151;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            z-index: 60;
+            font-size: .85rem;
+        }
+
+        #kom.open {
+            display: flex;
+        }
+
+        #kl {
+            flex: 1;
+            overflow: auto;
+        }
+
+        .c {
+            margin-bottom: .9rem;
+        }
+
+        .c p {
+            margin: .1rem 0;
+            color: #d1d5db;
+        }
+
+        .av {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 9999px;
+            background: #eab308;
+            color: #0d131f;
+            font-weight: 700;
+            text-align: center;
+            line-height: 24px;
+            font-size: .7rem;
+            margin-right: .4rem;
+        }
+
+        #kb {
+            text-align: center;
+        }
+
+        #kb button {
+            background: #eab308;
+            color: #0d131f;
+            font-weight: 600;
+            border-radius: 9999px;
+            padding: .3rem 1rem;
+        }
+
+        #kb input {
+            width: 100%;
+            background: #0d131f;
+            border: 1px solid #374151;
+            border-radius: .5rem;
+            padding: .4rem .6rem;
+            margin-bottom: .4rem;
+            color: #f3f4f6;
+        }
+
+        @media (max-width: 768px) {
+            .row,
+            .row.rev {
+                flex-direction: column;
+            }
+
+            .row > .native-size-image {
+                max-width: 100%;
+            }
+
+            .row.image-text-row > .native-size-image,
+            .row.rev.image-text-row > .native-size-image {
+                float: none;
+                display: block;
+                margin: 0 0 1rem;
+            }
+
+            .row .ph {
+                flex: none;
+                width: 100%;
+            }
+
+            .row .ph.writing-image {
+                width: min(100%, 22rem);
+                max-width: 100%;
+                margin: 0 auto 1rem;
+            }
+
+            .row .ph.photo-detail {
+                width: min(100%, 32rem);
+                margin: 0 auto 1rem;
+            }
+        }
+
+        /* --- Tambahan CSS untuk 3 Slide Beranda --- */
+        html {
+            scroll-snap-type: y mandatory;
+        }
+        
+        .slide {
+            /* Tinggi layar dikurangi tinggi navbar (pt-28 = 7rem) */
+            min-height: calc(100vh - 7rem); 
+            scroll-snap-align: start;
+            scroll-margin-top: 7rem; /* Menghentikan guliran pas di bawah navbar */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .math-highlight-card {
+            border-radius: 1rem;
+            background-image:
+                linear-gradient(rgba(13, 19, 31, .7), rgba(13, 19, 31, .88)),
+                var(--highlight-image);
+            background-position: center;
+            background-size: cover;
+        }
+        /* --- Akhir Tambahan CSS --- */
+    </style>
+</head>
+<body class="antialiased min-h-screen">
+
+    <!-- STICKY GLASSMORPHISM NAVBAR -->
+    <nav class="glass-nav fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Identitas Kiri (Berfungsi sebagai tombol Home) -->
+            <button onclick="pindahHalaman('beranda', 'nav-beranda')" class="text-xl font-extrabold tracking-wider text-white hover:text-[#eab308] transition">
+                BACHTIAR BARRA.
+            </button>
+
+            <!-- Menu Kanan -->
+            <div class="flex space-x-6 text-sm md:text-base font-medium" id="menu-navigasi">
+                <button id="nav-beranda" onclick="pindahHalaman('beranda', 'nav-beranda')" class="nav-item aktif hidden md:block">Beranda</button>
+                <button id="nav-matematika" onclick="pindahHalaman('matematika', 'nav-matematika')" class="nav-item">Matematika</button>
+                <button id="nav-entertainment" onclick="pindahHalaman('entertainment', 'nav-entertainment')" class="nav-item">Entertainment</button>
+                <button id="nav-kontak" onclick="pindahHalaman('kontak', 'nav-kontak')" class="nav-item">Kontak</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- KONTEN UTAMA -->
+    <main class="max-w-6xl mx-auto px-6 pt-28 pb-20">
+
+        <!-- ================= HALAMAN BERANDA ================= -->
+        <section id="beranda" class="halaman aktif">
+            
+            <!-- SLIDE 1: UCAPAN SELAMAT DATANG -->
+            <div class="slide">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-12 w-full">
+                    <div class="w-full md:w-1/2">
+                        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+                            Selamat Datang.<br>
+                            <span class="text-3xl md:text-5xl font-semibold text-gray-400 mt-2 block">Ini adalah arsip saya.</span>
+                        </h1>
+                    </div>
+                    <div class="w-full md:w-1/2 flex justify-end">
+                        <div class="card-bg w-full md:w-[400px] h-[300px] rounded-xl flex items-center justify-center overflow-hidden">
+                            <img src="image/archive.webp" alt="Ilustrasi" class="w-full h-full object-cover opacity-70">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: HIGHLIGHT MATEMATIKA -->
+            <div class="slide">
+                <div class="text-center mb-10 w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] inline-block border-b-4 border-[#eab308] pb-2">Highlight Matematika</h2>
+                    <p class="text-gray-400 mt-3 text-lg">Eksplorasi karya dan perangkat pembelajaran matematika.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                    <!-- Ganti nama file pada --highlight-image untuk mengubah gambar latar kartu ini. -->
+                    <button onclick="tampilDetailKarya('mathra')" class="card-bg math-highlight-card h-48 rounded-xl flex flex-col items-center justify-center text-xl font-bold p-4 text-center hover:text-[#eab308]" style="--highlight-image: url('image/mathra_icon.webp')">
+                        Mathra-Cages
+                        <span class="text-sm font-normal text-gray-400 mt-2">Trading Card Game Fisik</span>
+                    </button>
+                    <button onclick="tampilDetailKarya('tcg')" class="card-bg math-highlight-card h-48 rounded-xl flex flex-col items-center justify-center text-xl font-bold p-4 text-center hover:text-[#eab308]" style="--highlight-image: url('image/tcg_icon.webp')">
+                        TCG Matematika
+                        <span class="text-sm font-normal text-gray-400 mt-2">Game Web Interaktif</span>
+                    </button>
+                    <button onclick="keBawahPerangkat()" class="card-bg math-highlight-card h-48 rounded-xl flex flex-col items-center justify-center text-xl font-bold text-center px-4 hover:text-[#eab308]" style="--highlight-image: url('image/buku.webp')">
+                        Perangkat<br>Pembelajaran
+                        <span class="text-sm font-normal text-gray-400 mt-2">LKPD & Modul Ajar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: HIGHLIGHT ENTERTAINMENT -->
+            <div class="slide relative">
+                <div class="text-center mb-10 w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] inline-block border-b-4 border-[#eab308] pb-2">Highlight Entertainment</h2>
+                    <p class="text-gray-400 mt-3 text-lg">Sisi lain dari arsip ini, berisi hobi dan hal-hal random.</p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8 w-full">
+                    <!-- Games -->
+                    <div class="w-full md:w-1/2 flex flex-col">
+                        <h3 class="text-2xl font-bold text-white mb-4 border-l-4 border-[#eab308] pl-3">🎮 Games</h3>
+                        <div class="card-bg p-6 rounded-xl text-md text-gray-300 flex-1">
+                            Bagian ini berisi tentang beberapa game yang telah saya mainkan. Tersedia pengenalan game, info akun, dan fun fact.
+                            <button onclick="pindahHalaman('entertainment', 'nav-entertainment')" class="mt-4 text-[#eab308] font-bold hover:underline block">Lihat Koleksi Game &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- Random -->
+                    <div class="w-full md:w-1/2 flex flex-col">
+                        <h3 class="text-2xl font-bold text-white mb-4 border-l-4 border-[#eab308] pl-3">📸 Random</h3>
+                        <div class="card-bg p-6 rounded-xl text-md text-gray-300 flex-1">
+                            Bagian ini berisi tentang beberapa hal-hal random yang saya abadikan. Baik berupa foto maupun tulisan yang memiliki cerita unik.
+                            <button onclick="pindahHalaman('entertainment', 'nav-entertainment')" class="mt-4 text-[#eab308] font-bold hover:underline block">Jelajahi Momen &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kontak Singkat -->
+                <div class="card-bg p-4 rounded-xl flex flex-wrap justify-center gap-8 text-gray-300 w-full mt-8">
+                    <a data-l="ig" href="#" class="hover:text-[#eab308] font-medium flex items-center gap-3">
+                        <i class="fa-brands fa-instagram text-2xl"></i> Instagram
+                    </a>
+                    <a data-l="wa" href="#" class="hover:text-[#eab308] font-medium flex items-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i> WhatsApp
+                    </a>
+                    <a data-l="fb" href="#" class="hover:text-[#eab308] font-medium flex items-center gap-3">
+                        <i class="fa-brands fa-facebook text-2xl"></i> Facebook
+                    </a>
+                    <!-- Menambahkan Discord di Beranda -->
+                    <a data-l="dc" href="#" class="hover:text-[#eab308] font-medium flex items-center gap-3">
+                        <i class="fa-brands fa-discord text-2xl"></i> Discord
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HALAMAN MATEMATIKA ================= -->
+        <section id="matematika" class="halaman">
+            
+            <!-- SLIDE 1: TENTANG PERMAINAN -->
+            <div class="slide">
+                <div class="w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] mb-10 text-center md:text-left">Permainan</h2>
+                    
+                    <div class="space-y-6">
+                       <!-- TCG Math -->
+                        <div class="card-bg p-6 rounded-xl flex flex-col md:flex-row gap-8 items-center cursor-pointer" onclick="tampilDetailKarya('tcg')">
+                            <div class="w-full md:w-1/3 h-40 bg-[#0d131f] rounded-lg flex items-center justify-center border border-gray-700 relative overflow-hidden group-hover:border-[#eab308] transition">
+                                <img src="image/tcg_icon.webp" alt="TCG" class="absolute w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <h3 class="text-2xl font-bold mb-3 hover:text-[#eab308] transition">Math Trading Card</h3>
+                                <p class="text-gray-400">Integrasi soal matematika dengan sistem permainan trading-card game. Latih kemampuan materi transformasimu untuk mengalahkan lawan!</p>
+                            </div>
+                        </div>
+
+                        <!-- Mathra Cages -->
+                        <div class="card-bg p-6 rounded-xl flex flex-col md:flex-row gap-8 items-center cursor-pointer" onclick="tampilDetailKarya('mathra')">
+                            <div class="w-full md:w-1/3 h-40 bg-[#0d131f] rounded-lg flex items-center justify-center border border-gray-700 relative overflow-hidden group-hover:border-[#eab308] transition">
+                                <img src="image/mathra_icon.webp" alt="Mathra Cages" class="absolute w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="w-full md:w-2/3">
+                                <h3 class="text-2xl font-bold mb-3 hover:text-[#eab308] transition">Mathra-Cages</h3>
+                                <p class="text-gray-400">Integrasi permainan fisik Trading Card Game dengan sistem berbasis website. Duel bersama temanmu untuk mendapatkan skor akhir yang memuaskan!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: PERANGKAT PEMBELAJARAN -->
+            <!-- Memindahkan id="perangkat" ke bagian slide agar scroll otomatis dari tombol di beranda tetap bekerja -->
+            <div class="slide" id="perangkat">
+                <div class="w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] mb-10 text-center md:text-left">Perangkat Pembelajaran</h2>
+                    
+                    <!-- Grid Perangkat Pembelajaran -->
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="font-bold text-xl mb-4 border-b border-gray-700 pb-2">LKPD</div>
+                        <div class="font-bold text-xl mb-4 border-b border-gray-700 pb-2">Modul Ajar</div>
+                        <div class="font-bold text-xl mb-4 border-b border-gray-700 pb-2">Soal Asesmen</div>
+
+                        <!-- Fase D -->
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase D</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase D</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase D</button>
+
+                        <!-- Fase E -->
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase E</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase E</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase E</button>
+
+                        <!-- Fase F -->
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase F</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase F</button>
+                        <button class="card-bg py-4 rounded-lg font-semibold hover:text-[#eab308]">Fase F</button>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- ================= HALAMAN ENTERTAINMENT UTAMA ================= -->
+        <section id="entertainment" class="halaman">
+            
+            <!-- SLIDE 1: GAMES -->
+            <div class="slide">
+                <div class="w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] mb-10 text-center md:text-left">Games</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- FGO -->
+                        <button onclick="bukaSubGame('fgo')" class="card-bg aspect-square md:aspect-auto md:h-64 rounded-xl flex flex-col items-center justify-center p-6 gap-4 hover:text-[#eab308] transition group">
+                            <img src="image/fgo_icon.webp" alt="F/GO" class="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-2xl font-bold">F/GO</span>
+                        </button>
+                        <!-- HSR -->
+                        <button onclick="bukaSubGame('hsr')" class="card-bg aspect-square md:aspect-auto md:h-64 rounded-xl flex flex-col items-center justify-center p-6 gap-4 hover:text-[#eab308] transition group">
+                            <img src="image/hsr_icon.webp" alt="HSR" class="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-2xl font-bold">HSR</span>
+                        </button>
+                        <!-- WUWA -->
+                        <button onclick="bukaSubGame('wuwa')" class="card-bg aspect-square md:aspect-auto md:h-64 rounded-xl flex flex-col items-center justify-center p-6 gap-4 hover:text-[#eab308] transition group">
+                            <img src="image/wuwa_icon.webp" alt="WUWA" class="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-2xl font-bold">WUWA</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: RANDOM -->
+            <div class="slide">
+                <div class="w-full">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#eab308] mb-10 text-center md:text-left">Random</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Foto -->
+                        <button onclick="bukaRandom('foto')" class="card-bg h-48 md:h-64 rounded-xl flex items-center justify-center overflow-hidden relative group">
+                            <img src="image/foto_icon.webp" alt="Foto" class="absolute w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500">
+                            <span class="relative text-3xl font-bold z-10 group-hover:text-[#eab308] transition">Foto</span>
+                        </button>
+                        <!-- Tulisan -->
+                        <button onclick="bukaRandom('tulisan')" class="card-bg h-48 md:h-64 rounded-xl flex items-center justify-center overflow-hidden relative group">
+                            <img src="image/tulisan_icon.webp" alt="Tulisan" class="absolute w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500">
+                            <span class="relative text-3xl font-bold z-10 group-hover:text-[#eab308] transition">Tulisan</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+
+        <!-- ================= DETAIL GAME: F/GO ================= -->
+        <section id="game-fgo" class="halaman">
+            <button onclick="pindahHalaman('entertainment', 'nav-entertainment')" class="text-[#eab308] hover:text-white mb-6 font-bold flex items-center gap-2">
+                ← Kembali ke Games
+            </button>
+            
+            <div class="flex flex-col md:flex-row gap-10 items-start">
+                <img src="image/fgo_icon.webp" class="w-48 h-48 rounded-3xl shadow-lg">
+                <div class="flex-1">
+                    <h2 class="text-4xl font-extrabold mb-2">Fate/Grand Order</h2>
+                    <h3 class="text-xl text-gray-400 mb-6 border-b border-gray-700 pb-4">LASENGLE / TYPE-MOON</h3>
+                    
+                    <!-- Sub-Navigasi Dalam Game -->
+                    <div class="flex gap-4 mb-6 border-b border-gray-700 pb-2">
+                        <button onclick="switchTabFgo('pengenalan')" id="btn-fgo-pengenalan" class="text-[#eab308] font-bold">Pengenalan</button>
+                        <button onclick="switchTabFgo('akun')" id="btn-fgo-akun" class="text-gray-500 hover:text-white">Info Akun</button>
+                        <button onclick="switchTabFgo('funfact')" id="btn-fgo-funfact" class="text-gray-500 hover:text-white">Funfact</button>
+                    </div>
+
+                    <!-- Konten Pengenalan -->
+                    <div id="fgo-pengenalan" class="text-gray-300 leading-relaxed text-lg">
+                        <p class="mb-4">Fate/Grand Order adalah game RPG gacha seluler dari seri Fate untuk Android dan iOS yang dikembangkan oleh LASENGLE (sebelumnya DELIGHTWORKS), diterbitkan oleh Aniplex, dan dilisensikan oleh TYPE-MOON. Awalnya dirilis di Jepang pada 2015. Game ini adalah RPG berbasis giliran (turn-based) dengan segmen cerita bergaya visual novel.</p>
+                        <p>Sampai saat ini, F/GO masih eksis dan mampu bersaing dengan game tipe gacha lainnya. Kekuatannya selama 11 tahun terus didukung oleh komunitas yang besar. Terlepas dari kejayaannya tersebut, F/GO dinilai playernya sebagai game yang cukup "pelit". Bagaimana tidak, untuk mendapatkan satu karakter bintang 5 baru dijamin pada pull ke-330.</p>
+                    </div>
+
+                    <!-- Konten Info Akun -->
+                    <div id="fgo-akun" class="hidden text-gray-300">
+                        <img src="image/fgo_akun.webp" class="w-full rounded-xl mb-6 shadow-md border border-gray-700">
+                        <p class="mb-2">Berikut adalah informasi mengenai akun saya:</p>
+                        <ul class="list-disc ml-5 mb-4 text-[#eab308]">
+                            <li><span class="text-gray-300">Nickname: tiarrr</span></li>
+                            <li><span class="text-gray-300">Level: 140</span></li>
+                            <li><span class="text-gray-300">ID: 283,164,915</span></li>
+                        </ul>
+                        <p>Akun ini berada pada server JP sehingga hanya bisa berteman pada akun dengan server yang sama. Hampir sulit dipercaya di game yang memiliki pity hingga menyentuh 330 pull ini, akun saya diberikan banyak karakter limited.</p>
+                    </div>
+
+                    <!-- Konten Funfact List -->
+                    <div id="fgo-funfact" class="hidden space-y-4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HALAMAN DINAMIS (detail karya, game, random) ================= -->
+        <section id="dinamis" class="halaman"></section>
+
+        <!-- ================= HALAMAN KONTAK ================= -->
+        <section id="kontak" class="halaman text-center py-20">
+            <h2 class="text-4xl font-extrabold text-[#eab308] mb-4">Mari Terhubung!</h2>
+            <p class="text-xl text-gray-400 mb-12">Temukan saya di berbagai platform di bawah ini.</p>
+            <div class="flex justify-center gap-8">
+                <!-- Instagram -->
+                <a data-l="ig" target="_blank" rel="noopener" href="#" class="w-16 h-16 bg-[#172030] rounded-full flex items-center justify-center hover:bg-[#eab308] hover:text-[#0d131f] transition shadow border border-gray-700 text-3xl">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <!-- WhatsApp -->
+                <a data-l="wa" target="_blank" rel="noopener" href="#" class="w-16 h-16 bg-[#172030] rounded-full flex items-center justify-center hover:bg-[#eab308] hover:text-[#0d131f] transition shadow border border-gray-700 text-3xl">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <!-- Facebook -->
+                <a data-l="fb" target="_blank" rel="noopener" href="#" class="w-16 h-16 bg-[#172030] rounded-full flex items-center justify-center hover:bg-[#eab308] hover:text-[#0d131f] transition shadow border border-gray-700 text-3xl">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <!-- Discord -->
+                <a data-l="dc" target="_blank" rel="noopener" href="#" class="w-16 h-16 bg-[#172030] rounded-full flex items-center justify-center hover:bg-[#eab308] hover:text-[#0d131f] transition shadow border border-gray-700 text-3xl">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <button class="fab" id="fab" aria-label="Komentar" hidden>💬</button>
+    <aside id="kom">
+        <div id="kl"></div>
+        <div id="kb"></div>
+    </aside>
+
+    <!-- SCRIPT JAVASCRIPT UNTUK SPA (Single Page Application) -->
+    <script>
+        // Fungsi utama untuk pindah halaman dari Navbar
+        function pindahHalaman(idHalaman, idTombol) {
+            if (window.setKom) setKom(null, []);
+
+            // Sembunyikan semua section (.halaman)
+            document.querySelectorAll('.halaman').forEach(el => el.classList.remove('aktif'));
+
+            // Tampilkan section yang dituju
+            document.getElementById(idHalaman).classList.add('aktif');
+
+            // Reset warna semua tombol navigasi
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('aktif'));
+
+            // Warnai tombol navigasi yang sedang aktif (jika ada idTombol)
+            if (idTombol) {
+                document.getElementById(idTombol).classList.add('aktif');
+            }
+
+            // Scroll otomatis ke paling atas setiap pindah halaman
+            window.scrollTo(0, 0);
+        }
+
+        // Fungsi untuk Navigasi Tab di Dalam Halaman F/GO
+        function switchTabFgo(tabId) {
+            // Sembunyikan semua tab konten FGO
+            document.getElementById('fgo-pengenalan').classList.add('hidden');
+            document.getElementById('fgo-akun').classList.add('hidden');
+            document.getElementById('fgo-funfact').classList.add('hidden');
+
+            // Reset style semua tombol tab FGO
+            document.getElementById('btn-fgo-pengenalan').className = "text-gray-500 hover:text-white";
+            document.getElementById('btn-fgo-akun').className = "text-gray-500 hover:text-white";
+            document.getElementById('btn-fgo-funfact').className = "text-gray-500 hover:text-white";
+
+            // Tampilkan konten yang dipilih dan beri warna kuning pada tombolnya
+            document.getElementById('fgo-' + tabId).classList.remove('hidden');
+            document.getElementById('btn-fgo-' + tabId).className = "text-[#eab308] font-bold";
+            setKom(tabId === 'funfact' ? 'f-fgo' : null, GAME.fgo.kom);
+        }
+
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script>
+            /* ===== PENGATURAN ===== */
+            const FB_CONFIG = null; // Isi dengan konfigurasi Firebase untuk mengaktifkan login Google dan komentar.
+const LINKS = {
+        tcg: 'https://tinyurl.com/cxpxazwf',
+        mathra: 'https://tinyurl.com/2jsyc55h',
+        wa: 'https://wa.me/6287719758337',
+        fb: 'https://www.facebook.com/share/1FAeGkhWF3/',
+        ig: 'https://www.instagram.com/rmdhn_tiar',
+        dc: 'https://discord.com/users/787212255619579904',
+        yt: '#' // GANTI dengan link video Noble Phantasm Moriarty
+    };
+            /* Semua gambar dibaca dari folder image/. Jika file belum ada, muncul kotak kosong. */
+            const IMG = (file, className = '') =>
+                `<div class="ph ${className}"><img src="image/${file}" alt="" onerror="this.remove()"></div>`;
+            const SOON = '<p>Konten segera hadir.</p>';
+
+/* ===== DATA ===== */
+const KARYA={
+ tcg:{t:'TCG Matematika',img:'tcg_logo.webp',
+  intro:['TCG (<i>Transformation Card Game</i>) Matematika adalah salah satu media pembelajaran yang saya dan teman-teman saya buat pada semester 3. Media ini merupakan luaran dari Mata Kuliah Media Pembelajaran Matematika. Media TCG Matematika memadukan soal-soal matematika, terutama materi transformasi jenjang SMA ke dalam basis permainan TCG. Sistem dari permainan ini adalah <i>single player</i> melawan komputer.','TCG Matematika tidak diciptakan untuk pemahaman konsep siswa. Media ini ditujukan untuk <i>drill</i> / latihan soal guna meningkatkan abstraksi siswa terhadap materi transformasi. Sebagai salah satu luaran dari Mata Kuliah, media ini tentunya masih banyak kekurangan. Oleh karena itu, <i>feedback</i> dari beberapa pengguna pastinya akan sangat bermanfaat untuk keberlanjutan media ini selanjutnya.'],
+  cara:['Pemain masuk ke website lalu menekan “Masuki Petualangan”','Setelah tampilan berubah, klik “Start Game”','Pemain akan menarik 5 kartu dari deck sebagai awalan.','Pada setiap awal giliran, pemain bisa menarik satu kartu dari deck.','Setelah menarik kartu, pemain memilih kartu yang akan digunakan, baik kartu soal maupun spell untuk ditaruh di tempatnya.','Setelah memilih, pemain menekan “Set Phase” untuk menyelesaikan (menginput jawaban) soal pada kartu soal.','Setelah jawaban disimpan oleh sistem, pemain menekan “Battle Phase”. Jawaban pemain akan ditentukan benar salahnya. Jika benar, maka ATK dari kartu soal yang dipilih akan menjadi serangan ke lawan. Akan tetapi, jika salah, akan berbalik ke diri sendiri.','Setelah perhitungan serangan, tekan “End Phase” untuk mengakhiri giliran dan biarkan lawan (komputer) melakukan giliran.','Permainan akan berakhir ketika salah satu nyawa berkurang menjadi 0.'],
+  lead:'Alur permainan dari TCG Matematika adalah sebagai berikut:',link:'Untuk bermain TCG Matematika ini, silakan <i>scan</i> QR-<i>code</i> berikut atau akses <i>link</i> di bawahnya.',
+  kom:['Min <i>request</i> mode multiplayer dong biar seru lawan temen.','Medianya keren min, coba kasih variasi soal atau <i>update</i> berkala gitu.','Susah banget soalnya min, coba kasih kemudahan dikit lahh.']},
+ mathra:{t:'Mathra-Cages',img:'mathra_logo.webp',
+  intro:['Mathra-Cages adalah salah satu media yang saya dan teman-teman saya ciptakan untuk pembelajaran matematika. Media ini merupakan salah satu luaran dari Mata Kuliah <i>Edupreneur in Mathematics</i>. Mathra-Cages mengintegrasikan permainan fisik <i>Trading Card Game</i> dengan sistem web sebagai “wasit” untuk mengatur jalannya pertandingan. Media ini membutuhkan dua pemain yang akan melawan satu sama lain. Tentunya, dalam permainannya, pemain dituntut untuk menyelesaikan soal matematika guna meresolusi setiap efeknya.','Sama seperti TCG Matematika, Mathra-Cages juga tidak dibuat untuk penanaman konsep. Media ini merupakan salah satu alternatif untuk latihan-latihan soal. Mengingat media ini diperjualbelikan, umpan balik dari pembeli sangat diperlukan untuk kebaruan dari media ini.'],
+  cara:['Pemain menyusun deck yang terdiri dari 25 kartu.','Kedua pemain melakukan suit. Pemenangnya dapat memilih ingin bermain pada giliran pertama atau kedua.','Pada giliran pertama, pemain hanya bisa meletakkan kartu bidak di field, tidak bisa menyerang, namun tetap bisa mengaktifkan spell.','Untuk mengaktifkan kartu, pemain bisa melakukan scan QR-code pada kartu atau menginput id kartu.','Setiap memanggil kartu bidak, pemain harus menjawab soal matematika agar efek dari kartu teresolusi.','Setelah selesai meletakkan dan menggunakan spell, pemain mengakhiri giliran pertama.','Ketika giliran kedua, pemain pada giliran ini sudah bisa menyerang setelah memanggil bidak.','Pemain bebas menentukan bidak mana yang akan diserang. Perhitungan nilai serangan akan berdasarkan nilai ATK setiap kartu. Jika salah satu ATK-nya lebih kecil, maka kartu tersebut akan hancur. Jika pemain tidak memiliki kartu bidak, lawan bisa melakukan serangan langsung.','Setelah menyerang, pemain kedua mengakhiri gilirannya dan beralih ke pemain pertama.','Permainan terus berlanjut hingga salah satu nyawa pemain mencapai 0.'],
+  lead:'Alur permainan dari Mathra-Cages adalah sebagai berikut:',link:'Untuk pembelian Mathra-Cages ini, silakan <i>scan</i> QR-<i>code</i> berikut atau akses <i>link</i> di bawahnya.',
+  kom:['Minn, ini pembeliannya via shopee aja kah? Tokped gaada yaa?','Ditunggu kedatangan barangnya minn, udah ga sabar buat duel.','Jangan ngasih soal terlalu <i>random</i> minn, gabisa ditebak inii.']}
+};
+/*
+ * PETUNJUK MENGISI FUNFACT GAME:
+ * 1. Di `fun`, isi urutan [ID, judul, ringkasan, nama file thumbnail].
+ * 2. Di `det`, isi HTML detail untuk funfact pada urutan yang sama.
+ *    Item pertama pada `fun` harus berpasangan dengan item pertama pada `det`.
+ * 3. Ganti teks contoh di dalam <p> dan nama file gambar pada IMG('...').
+ *    Simpan gambar di folder image/. Hapus blok <div class="row"> jika tidak perlu gambar.
+ * 4. Untuk menambahkan funfact, tambahkan satu item di `fun` dan detailnya di `det`.
+ *    Jumlah dan urutan item pada kedua daftar harus selalu sama.
+ */
+const GAME={
+ fgo:{t:'Fate/Grand Order',s:'F/GO',img:'fgo.jpg',
+  intro:['Fate/Grand Order adalah game RPG <i>gacha</i> seluler dari seri Fate untuk Android dan iOS yang dikembangkan oleh LASENGLE (sebelumnya DELiGHTWORKS), diterbitkan oleh Aniplex, dan dilisensikan oleh TYPE-MOON. Awalnya dirilis di Jepang pada 2015. Game ini adalah RPG berbasis giliran (<i>turn-based</i>) dengan segmen cerita bergaya visual novel yang menyatukan jajaran karakter dari berbagai karya seri Fate, karya TYPE-MOON lainnya. Cerita dari game ini juga telah diadaptasi ke dalam beberapa manga, film animasi, dan serial animasi.','Sampai saat ini, F/GO masih eksis dan mampu bersaing dengan game tipe <i>gacha</i> lainnya. Kekuatannya selama 11 tahun terus didukung oleh komunitas yang besar. Terlepas dari kejayaannya tersebut, F/GO dinilai playernya sebagai game yang cukup “pelit”. Bagaimana tidak, untuk mendapatkan satu karakter bintang 5 baru dijamin pada <i>pull</i> ke-330.'],
+  info:['Nickname: tiarrr','Level: 140','ID: 283,164,915'],infoImg:'fgo_akun.webp',
+  infoP:'Akun ini berada pada server JP sehingga hanya bisa berteman pada akun dengan server yang sama. Hampir sulit dipercaya di <i>game</i> yang memiliki <i>pity</i> hingga menyentuh 330 <i>pull</i> ini, akun saya diberikan banyak karakter <i>limited</i>.',
+  fun:[['FFF/G01','<i>Easter Egg</i> di Balik Animasi sang Jenius','James Moriarty, musuh bebuyutan Sherlock Holmes, ternyata menyimpan hal menarik di animasi Noble Phantasmnya!','thumbnail_fgo_1.webp'],['FFF/G02','Cerita Original dan Terpanjang','Lostbelt 6: Avalon Le Fae, ternyata ditulis langsung oleh Kinoko Nasu dan skripnya sangat banyak!','thumbnail_fgo_2.webp']],
+  kom:['Menurut kalian bakal ada <i>easter egg</i> yang lain ngga di animasi Moriarty?','Kayanya ada, cuman ngga spesifik kaya gambar hati itu deh.','Ada kok, itu yang e pangkat pi juga salah satu persamaan terkenal di matematika.'],
+  det:[
+    // Detail ini menjadi satu-satunya sumber konten untuk funfact FGO pertama.
+    `<div class="relative w-full overflow-hidden rounded-xl mb-6" style="padding-top: 56.25%;">
+        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/q-pxm0nz1zE?si=T9HNMRpySbJjLJ3l" title="Animasi Noble Phantasm James Moriarty" frameborder="0" allowfullscreen></iframe>
+     </div>
+     <p class="text-gray-300 text-lg leading-relaxed mb-6">
+        Reaksi pertama ketika melihat animasi Noble Phantasm dari karakter James Moriarty: Ruler, tentunya sedikit (atau mungkin banyak) kaget. Bagaimana tidak, animasinya malah menampilkan persamaan dan rumus matematika. Akan tetapi, sejujurnya hal ini cukup bisa diwajari mengingat dalam literatur karya Sir Arthur Conan Doyle, James Moriarty memang digambarkan sebagai seorang akedimisi jenius, terlepas dari sifat buruknya.
+     </p>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <img src="image/fgo_funfact_1a.webp" alt="Persamaan matematika pada animasi Moriarty" class="rounded-xl w-full border border-gray-700">
+        <img src="image/fgo_funfact_1b.webp" alt="Grafik persamaan matematika dari animasi Moriarty" class="rounded-xl w-full border border-gray-700 bg-white">
+     </div>
+     <p class="text-gray-300 text-lg leading-relaxed mb-6">
+        Setelah diamati lebih lanjut, ditemukanlah satu persamaan yang cukup unik. Jika kita mencoba untuk memasukkan persamaan ini ke dalam aplikasi GeoGebra untuk menggambar grafik, maka akan tampak gambar seperti di atas. Siapa sangka, di balik kecerdasan dan kelicikannya, ia memiliki cara tersendiri untuk mengekspresikan perasaannya.
+     </p>`,
+
+    // DETAIL FUNFACT FGO KEDUA: gunakan petunjuk yang sama seperti templat di bawah.
+    `<div class="row image-text-row">
+        <img src="image/fgo_funfact_2a.webp" alt="Potongan adegan siaran Fate/Grand Order dengan tumpukan buku skenario" class="native-size-image">
+        <p class="text-justify">
+            Lostbelt 6: Fae Round Table Domain, Avalon le Fae memegang rekor legendaris dalam komunitas Fate/Grand Order (FGO) sebagai mahakarya orisinal terpanjang yang ditulis langsung oleh Kinoko Nasu. Menurut wawancara Nasu di majalah Famitsu dan Type-Moon Ace, naskah bahasa Jepang untuk chapter ini mencapai sekitar 580.000 karakter, yang jika diterjemahkan ke bahasa Inggris menembus angka 300.000 hingga 315.000 kata. Sebagai gambaran, volume cerita dalam satu chapter game mobile ini jauh lebih tebal dari gabungan buku pertama dan ketiga novel epik The Lord of the Rings, serta menyamai tebal teks keseluruhan rute orisinal dari visual novel Fate/stay night.
+        </p>
+     </div>
+     <div class="row rev image-text-row">
+        <img src="image/fgo_funfact_2b.webp" alt="Gambar kedua funfact Lostbelt 6" class="native-size-image">
+        <p class="text-justify">
+            Menariknya, Nasu mengungkapkan bahwa pada perencanaan awal, LB6 hanya didesain sebagai skenario "Kebaikan melawan Kejahatan" yang sederhana untuk memanaskan suasana sebelum pemain menghadapi klimaks di Lostbelt 7. Namun, karena ia terlalu terbawa suasana (got carried away) saat mengeksplorasi dunia dan karakter faerie, skala ceritanya meluap pesat hingga berkas murni teks naskahnya saja memakan memori sebesar 1.8 MB—ukuran yang tergolong sangat masif hanya untuk susunan alfabet pemrograman. Akibat ledakan skala ini, pihak pengembang terpaksa memecah perilisan Avalon le Fae menjadi tiga babak (Act) yang diluncurkan secara bertahap antara bulan Juni hingga Agustus 2021.
+        </p>
+     </div>`
+  ]},
+ hsr:{t:'Honkai: Star Rail',s:'HSR',img:'hsr_icon.webp',
+  intro:['Honkai: Star Rail adalah permainan video <i>role play</i> yang dikembangkan oleh Mihoyo. Permainan ini dirilis pada 26 April 2023 untuk Windows dan perangkat seluler. Honkai: Star Rail mengikuti gaya alur permainan dari RPG klasik Jepang, pemain membangun barisan karakter dan mengontrol tim beranggotakan empat orang dalam pertarungan <i>turn based</i>. Selain berbagai statistik yang memengaruhi kekuatan karakter, setiap karakter mempunyai peran tempur mereka (<i>Path</i>) dan serangkaian kemampuan unik yang disebut <i>Traces</i> dalam pertarungan.','Permainan ini berlatarkan alam semesta fantasi sains di mana umat manusia mengikuti (<i>Path</i>) makhluk tertentu yang disebut Aeon. Karakter pemain, Trailblazer, yang nama dan jenis kelaminnya dipilih oleh pemain, terbangun tanpa ingatan mereka di atas stasiun luar angkasa dan menemukan bahwa mereka dijiwai dengan Stellaron, entitas kosmik yang mengganggu. Dalam upaya untuk menemukan asal-usul mereka dan menghilangkan ancaman Stellaron yang tersisa, Trailblazer berangkat dengan kru Astral Express.'],
+  info:['Nickname: tiarrr','Level: 70','UID: 834855975'],infoImg:'hsr_akun.webp',
+  infoP:'Akun ini berada pada server SEA. Meski akun ini sudah cukup lama, saya masih memiliki sedikit karakter <i>limited</i> pada game ini. Seringnya, saya mengincar untuk membuat tim baru.<br><br>Saya cukup menikmati permainan ini secara kasual dan tetap memutuskan untuk menjadi <i>free to play player</i>. Tidak terlalu mengejar konten-konten <i>end game</i>. Asalkan tetap bisa menikmati perkembangan ceritanya saja sudah cukup.',
+  fun:[['FFHSR01','Siklus Pengulangan yang Sempurna','Siklus pengulangan (<i>looping</i>) yang dilakukan oleh Phainon pada <i>Main Quest</i> 3.4 ternyata menyimpan informasi menarik seputar matematika!','thumbnail_hsr_1.webp'],['FFHSR02','Pesan Tersirat yang Ingin Disampaikan','Trailer karakter baru, Cyrene pada versi 3.7 menampilkan kode yang menarik untuk diulik lebih lanjut!','thumbnail_hsr_2.webp']],
+  kom:['Di sini aku bener-bener <i>respect</i> sama Phainon atas pengorbanannya...','Setuju banget, <i>speechless</i> ...','Pengejaran api adalah perjalanan yang penuh kehilangan di dalamnya.'],
+  det:[`<div class="row image-text-row"><img src="image/funfact_hsr_1a.webp" alt="Siklus pengulangan Phainon" class="native-size-image"><p style="text-align:justify">Bagi pemain yang telah menyelesaikan <i>Trailblazer Quest</i> pada versi 3.4, pasti dibuat terpukau oleh kebenaran salah satu karakter Chrysos Heirs, Phainon. Salah satu kejutan yang diberi oleh penulis cerita adalah fakta bahwa Phainon telah melewati siklus pengulangan abadi sebanyak 33.550.336 kali. Pengulangan tersebut dilakukan untuk mencegah kebangkitan Irontomb sampai sang pahlawan dari luar datang. Akan tetapi, apa alasan di balik dipilihnya bilangan 33.550.336 sebagai siklus pengulangan yang dialami oleh Phainon? Mungkin, jawabannya adalah bilangan sempurna.</p></div>
+   <div class="row rev image-text-row"><img src="image/funfact_hsr_1b.webp" alt="Daftar lima bilangan sempurna pertama" class="native-size-image"><p style="text-align:justify">Bilangan sempurna adalah bilangan bulat positif yang nilainya sama dengan jumlah seluruh pembagi sejati positifnya (tidak termasuk bilangan itu sendiri). Sebagai contoh, bilangan sempurna pertama adalah 6. Mudah diketahui bahwa faktor sejati dari 6 adalah 1, 2 dan 3. Jumlah dari semua faktor sejatinya adalah 6. Inilah yang dimaksud dari bilangan sempurna.<br><br>Dilansir dari Wolfram MathWorld, gambar di samping adalah bilangan sempurna ke-1 sampai ke-5. Bilangan 33.550.336 menempati posisi ke-5 sebagai bilangan sempurna. Mungkin, penulis cerita ingin mengatakan bahwa 33.550.336 siklus yang dilalui oleh Phainon merupakan jumlah yang “sempurna” untuk penulisan karakternya.</p></div>`,
+    // DETAIL FUNFACT HSR KEDUA: ganti teks dan nama gambar contoh di bawah.
+    `<div class="relative w-full overflow-hidden rounded-xl mb-6" style="padding-top: 56.25%;">
+        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/rtSkMbDs1Xw?si=m6byMvpr7xt0F12Q" title="Video funfact Honkai: Star Rail" frameborder="0" allowfullscreen></iframe>
+     </div>
+     <div class="row image-text-row">
+        <!-- Ganti nama file dengan gambar di folder image/, atau hapus IMG() jika tidak perlu gambar. -->
+        <img src="image/funfact_hsr_2a.webp" alt="Ganti dengan deskripsi gambar funfact HSR" class="native-size-image">
+        <p class="text-justify">
+            Pada trailer karakter Cyrene, terdapat kode yang cukup menarik untuk diulik lebih lanjut. Kode tersebut ditulis dalam bentuk kode morse, seperti yang tampak pada gambar di samping. 
+            Kode morse yang ditulis adalah "... . . / -.-- --- .-- / - --- -- --- .-. .-. --- .-- /".
+        </p>
+     </div>
+     <div class="row rev image-text-row">
+        <img src="image/funfact_hsr_2b.webp" alt="Gambar pendukung funfact tentang pesan Cyrene" class="native-size-image">
+        <p class="text-justify">
+            Dengan melihat aturan kode morse, akan mudah diketahui terjemahannya. Benar, terjemahannya adalah "SEE YOU TOMORROW". Pesan ini cukup menarik karena mengisyaratkan keadaan Cyrene dan Amphoreus sekarang.
+            Cyrene juga menanggung beban sebanyak 33.550.336 siklus pengulangan yang sama seperti Phainon. Hal ini mengisyaratkan bahwa Cyrene dan Amphoreus akan terus berulang sampai sang pahlawan dari luar datang. Inilah Tomorrow yang dimaksud dalam pesan tersebut, hari esok di mana kedatangan penyelamat dari luar yang mengakhiri siklus pengulangan abadi Amphoreus.
+        </p>
+     </div>`]},
+ wuwa:{t:'Wuthering Waves',s:'WUWA',img:'wuwa_icon.webp',
+  intro:['Wuthering Waves adalah permainan RPG aksi yang dikembangkan dan diterbitkan oleh Kuro Games yang dirilis pada 22 Mei 2024. Wuthering Waves berlatarkan dunia <i>post-apocalypse</i> futuristik setelah bencana yang disebut <i>Lament</i> memusnahkan sebagian besar umat manusia dan menyebabkan munculnya makhluk dan monster yang disebut Tacet Discords. Umat manusia harus segera beradaptasi dengan ancaman tersebut dan membangun kembali peradabannya. Cerita dari permainan ini mengikuti Rover yang amnesia dan berangkat menjelajahi dunia baru.','Wuthering Waves merupakan permainan <i>open world</i>. Pemain mengontrol protagonis, Rover serta karakter yang disebut Resonator. Resonator dibagi menjadi 2 jenis kelangkaan, yaitu bintang 4 dan bintang 5. Sistem pertarungan di dalam permainan ini menampilkan keterampilan Intro dan Outro setiap karakternya. Permainan ini juga memuat sistem <i>gacha</i> yang disebut Convenes. Convenes dibagi menjadi dua jenis, Convenes senjata dan Resonator.'],
+  info:['Nickname: tiarrr','Level: 67','UID: 905508571'],infoImg:'wuwa_akun.webp',
+  infoP:'Akun ini berada pada server SEA. Akun ini juga terbilang cukup baru, mengingat baru dimainkan di tahun 2025. Akan tetapi, akun ini cukup beruntung karena sering mendapat karakter <i>limited</i>.<br><br>Penyampaian cerita di Wuthering Waves memang sangat menggiurkan, terlepas dari esensi ceritanya. Itulah yang menjadi nilai tambahan pada permainan ini. Sangat disayangkan, pada beberapa perangkat, permainan ini tidak terlalu bisa dimainkan secara optimal.',
+  fun:[['FFWUWA01','Referensi yang Tiada Batas','Fitur <i>achievement</i> pada Wuthering Waves memiliki referensi yang menarik untuk dibahas mulai dari anime, lagu, hingga kata-kata!','thumbnail_wuwa_1.webp'],['FFWUWA02','Satu dari Sekian Penyesalan Rover','Rover, salah satu karakter yang dinilai nyaris sempurna, ternyata mengakui penyesalannya!','thumbnail_wuwa_2.webp']],
+  kom:['Wuwa gapernah kehabisan buat memberi referensi gini sih.','Kadang referensinya membuka luka lama wkwkw.','Bayangin aja lagi enak enak eksplor tiba tiba <i>achievement</i> Amanojaku wkwk.'],
+  det:[`<div class="row image-text-row"><img src="image/wuwa_funfact_1a.webp" alt="Achievement Fly Me to the Moon di Wuthering Waves" class="native-size-image"><p style="text-align:justify">Sebagai salah satu game RPG, Wuwa pastinya akan menyajikan fitur <i>achievements</i> yang berisi hadiah-hadiah setelah player melakukan hal-hal tertentu. Bagian yang menarik dalam fitur ini adalah bagaimana cara developer untuk menyampaikan “selamat” pada <i>player</i>. Developer dengan sengaja memasukkan <i>achievement</i> yang berhubungan dengan <i>franchise</i> luar. Contoh mudahnya adalah gambar di samping tentang <i>achievement fly me to the moon</i>.</p></div>
+   <div class="row rev image-text-row"><img src="image/wuwa_funfact_1b.webp" alt="Contoh referensi dari franchise lain di Wuthering Waves" class="native-size-image"><p style="text-align:justify"><i>Fly Me to the Moon</i> adalah salah satu lagu yang ditulis pada tahun 1954. Lagu ini juga merupakan lagu penutup dari Series Anime Neon Genesis Evangelion.<br><br>Tidak hanya itu, Wuthering Waves cukup banyak memasukkan referensi dari <i>franchise</i> lain, seperti pada gambar di samping. Mulai dari <i>The Storm That Is Approaching</i> yang merupakan lagu dari <i>game</i> Devil May Cry 5, <i>Five Night at Plushie’s</i> yang merupakan plesetan dari <i>Five Night at Freddy’s</i>, hingga “<i>Zoltraak</i>” yang merupakan sihir sekaligus lagu yang ada pada anime Frieren: Journey’s End. Wuthering Waves konsisten untuk menambahkan referensi seperti ini di setiap <i>update</i>. Barangkali, inovasi ini dilakukan oleh developer untuk menggaet beberapa fandom agar tertarik bermain <i>game</i> mereka.</p></div>`,
+    // DETAIL FUNFACT WUWA KEDUA: ganti teks dan nama gambar contoh di bawah.
+    `<div class="row image-text-row">
+        <!-- Ganti nama file dengan gambar di folder image/. -->
+        <img src="image/wuwa_funfact_2a.webp" alt="Ganti dengan deskripsi gambar funfact WUWA" class="native-size-image">
+        <p class="text-justify">
+            Pada <i>Main Quest</i> versi 2.5, kita dihadapkan dengan salah satu cerita yang cukup dalam. Cerita tersebut adalah <i>backstory</i> dari Phrolova. Kita diberi tahu bahwa Phrolova telah bertemua dengan Rover sebelumnya. Mereka bertemu pada pertunjukkan biola di mana Phrolova yang memainkannya.
+            Phrolova terkejut bahwa Rover tidak bertepuk tangan saat pertunjukkan selesai. Rover kemudian menjelaskan bahwa, lagu yang dibawakan oleh Phrolova bertema sedih, sehingga tidak cocok untuk tepuk tangan. mengetahui hal tersebut, Phrolova kagum dengan dirinya. Phrolova pun mengundang Rover untuk pertujukkan berikutnya, ia berjanji akan memberinya kursi khusus.
+            Rover berjanji padanya bahwa pasti akan datang. Akan tetapi, karena ia telah menghapus seluruh ingatannya, Rover tidak pernah datang terlepas dari Phrolova yang menunggunya terus menerus.
+        </p>
+     </div>
+     <div class="row rev image-text-row">
+        <!-- Ganti nama file dan deskripsi, atau hapus gambar ini jika tidak diperlukan. -->
+        <img src="image/wuwa_funfact_2b.webp" alt="Ganti dengan deskripsi gambar pendukung funfact WUWA" class="native-size-image">
+        <p class="text-justify">
+            Beberapa versi setelahnya, tepatnya pada versi 3.3, di area Dimmr Forest, kita dipertemukan dengan frekeunsi seseorang yang sudah berumur. Ia mengajak Rover untuk duduk dan berbincang kepadanya. Pada salah satu opsi,
+            Rover menyampaikan <i>"There's was a promise I couldn't keep"</i> yang artinya "Ada janji yang tidak bisa aku tepati". Kalimat sederhana ini tentu saja bisa merujuk ke banyak hal. Namun, mengingat salah satu kisah Phrolova yang tragis, bisa jadi hal ini merujuk ke sana. Bagaimana menurut kalian?
+        </p>
+     </div>`]}
+};
+const FOTO = [
+    ['Jejeran Pinus', 'F01', 'foto_icon_1.webp', ['Objek foto: Pohon pinus & langit pagi', 'Tanggal Pengambilan: 30 Agustus 2026', 'Tempat Pengambilan: Bumi Perkemahan Bedengan'], 'Foto ini diambil ketika kami berenam liburan ke Bedengan. Suasana di pagi hari yang cukup menenangkan dengan kilauan cahaya yang indah berpadu di sana. Jejeran pohon pinus yang tertata cukup menarik perhatian seakan-akan meminta untuk diabadikan. Mungkin, hasilnya tidak sebagus itu, tetapi cukup untuk mengarsipkan suasana yang damai.', ['Fotonya bagus banget minn, pake kamera apa inii?', 'Suasananya adem yaa, sejuk banget dilihat-lihat.', 'Kemarin banget habis ke situ sama teman-teman, emang paling cocok untuk <i>healing</i>.']],
+    ['Judul foto 2', 'F02', 'foto_icon_2.webp', [], SOON, []],
+    ['Judul foto 3', 'F03', 'foto_icon_3.webp', [], SOON, []],
+    // Templat F04: ganti judul, nama file gambar di folder image/, metadata, deskripsi, dan komentar contoh.
+    // Urutan kolom: [judul, ID, file gambar, metadata, deskripsi, komentar contoh].
+    ['Judul foto 4', 'F04', 'foto_icon_4.webp', ['Objek foto: Tulis objek foto', 'Tanggal Pengambilan: Tulis tanggal', 'Tempat Pengambilan: Tulis lokasi'], 'Tulis cerita atau deskripsi foto di sini.', []]
+];
+// Templat T04: ganti judul, nama file gambar di folder image/, isi tulisan, dan komentar contoh.
+// Urutan kolom: [judul, ID, gambar thumbnail, konten detail HTML, komentar contoh].
+const TULIS=[
+    ['<i>Jastrow’s Illusion</i>','T01','T01_icon.webp',`<div class="row">${IMG('T01_a.webp','writing-image')}<div style="text-align:justify"><p>Tahukah kalian bahwa gambar bagian atas dan bagian bawah adalah gambar yang sama? Sekilas, mungkin gambar bagian atas menampilkan 2 bagian kue yang besarnya berbeda. Namun, ketika keduanya ditumpuk, ternyata besarnya sama! Inilah yang disebut sebagai Ilusi Jastrow.</p><p>Ilusi Jastrow adalah ilusi geometris klasik, sebuah variasi kecil dari versi yang pertama kali dijelaskan oleh Joseph Jastrow pada tahun 1891. Jastrow sendiri menyatakan:<br>“Ukuran bagian atas tampak jelas lebih besar, karena sisi panjangnya disandingkan secara kontras dengan sisi yang lebih pendek dari bagian lainnya. Dalam menilai sebuah luasan (area), kita tidak dapat menghindari untuk memperhitungkan panjang garis-garis yang membatasi luasan tersebut, dan perbedaan (kontras) pada panjang garis-garis ini akan memengaruhi bagaimana kita membandingkan luasan tersebut. Kita menilai segala sesuatu secara relatif, bahkan ketika kita memiliki keinginan kuat untuk menilai secara mutlak.”</p></div></div>`,['Tipuan sederhana kaya gini ternyata ada penjelasan yang cukup ribet yaa.','Inget banget kasus ini di DC wkwkwk. Perkara kue doang loh.','Selalu tertarik sama info-info <i>random</i> kaya gini. Seolah oleh bikin “oh ternyata sesuatu yang sederhana bisa kelihatan rumit ya”.']],
+    ['<i>Vertical-Horizontal Illusion</i>','T02','T02_icon.webp',`<div class="row">${IMG('T02.jpg','writing-image')}<div style="text-align:justify">
+        <p>Golden ratio atau rasio emas adalah perbandingan yang sering dianggap “sempurna” dalam seni, arsitektur, hingga alam. Ketika dua ukuran dibandingkan, perbandingan yang paling estetis sering terlihat pada angka sekitar 1,618.</p><p>Yang menarik, pola seperti ini sering muncul dalam objek alami dan desain manusia. Meskipun tidak semua bentuk harus mengikuti rasio ini, keberadaannya memberi rasa keseimbangan yang terasa lebih nyaman di mata. Bentuk seperti spiral, proporsi wajah, dan tata letak desain kerap dikaitkan dengan prinsip ini.
+        </p>
+        </div></div>`,['Rasio emas selalu bikin visual jadi lebih enak dilihat.','Pernah liat struktur daun yang begitu proporsional.','Bikin kepikiran, kadang seni itu memang lebih “nyaman” kalau ada keseimbangan.']],
+    ['<i>Vertical-Horizontal Illusion</i>','T03','T03_icon.webp',`<div class="row">${IMG('T03.png','writing-image')}<div style="text-align:justify"><p>Dalam sebuah desain, kadang perhatian tidak hanya datang dari elemen yang paling mencolok, tetapi juga dari ruang kosong di sekitarnya. Ruang kosong itu memberi napas pada keseluruhan tampilan, tidak membuat semuanya terasa berdesakan.</p><p>Sama halnya dengan hidup, kita sering mencoba mengisi setiap ruang dengan aktivitas, respons, dan keputusan. Padahal, ada momen ketika yang paling bijak adalah berhenti sejenak, menilai, dan membiarkan ritme alami berjalan. Itulah bentuk keseimbangan yang tak selalu loud, tetapi sangat berdampak.</p></div></div>`,['Kesan paling kuat biasanya bukan dari yang ramai, tapi dari yang rapi.','Sempet sadar kalau ruang kosong itu juga bentuk perhatian.','Cara pandang ini bikin desain terasa lebih manusiawi.']],
+    ['Judul tulisan 4','T04','T04_icon.webp',`<div class="row">${IMG('T04.webp','writing-image')}<div style="text-align:justify"><p>Tulis paragraf pembuka tulisan di sini.</p><p>Tulis paragraf lanjutan atau penjelasan pendukung di sini.</p></div></div>`,[]]
+];
+const NAMES=['sylilya3134','kirana9832','reyza2130'];
+
+
+/* ===== HALAMAN TAMBAHAN DARI PDF ===== */
+const $ = id => document.getElementById(id);
+const BTN = (action, label) =>
+    `<button onclick="${action}" class="text-[#eab308] hover:text-white mb-6 font-bold flex items-center gap-2">← ${label}</button>`;
+const H2 = 'text-4xl font-extrabold text-[#eab308] mb-6';
+const TAB = (tabs, activeTab, action) =>
+    `<div class="flex gap-4 mb-6 border-b border-gray-700 pb-2">${tabs
+        .map(([key, label]) => `<button onclick="${action}'${key}')" class="${activeTab == key ? 'text-[#eab308] font-bold' : 'text-gray-500 hover:text-white'}">${label}</button>`)
+        .join('')}</div>`;
+
+function tampil(html, nav, komentar) {
+    $('dinamis').innerHTML = `<div class="text-gray-300 text-lg leading-relaxed">${html}</div>`;
+    pindahHalaman('dinamis', nav);
+    if (komentar) setKom(komentar[0], komentar[1]);
+}
+
+function keBawahPerangkat() {
+    pindahHalaman('matematika', 'nav-matematika');
+    const perangkat = $('perangkat');
+    if (perangkat) perangkat.scrollIntoView({ behavior: 'smooth' });
+}
+
+function tampilDetailKarya(karya, tab = 'pengenalan') {
+    const data = KARYA[karya];
+    let konten;
+
+    if (tab == 'pengenalan') {
+        konten = `<div class="row">${IMG(data.img, 'sq')}<p class="text-justify">${data.intro[0]}</p></div><p class="text-justify">${data.intro[1]}</p>`;
+    } else if (tab == 'caramain') {
+        konten = `<p class="mb-4">${data.lead}</p><ol class="list-decimal ml-6 space-y-2 text-justify">${data.cara.map(item => `<li>${item}</li>`).join('')}</ol>`;
+    } else {
+        konten = `<div class="flex flex-col items-center gap-4 text-center"><p>${data.link}</p>${IMG('qr_' + karya + '.webp', 'sq qr')}<a class="card-bg rounded-lg px-4 py-2 underline" href="${LINKS[karya]}" target="_blank" rel="noopener">${LINKS[karya]}</a></div>`;
+    }
+
+    tampil(
+        BTN("pindahHalaman('matematika','nav-matematika')", 'Kembali ke Permainan') +
+            `<h2 class="${H2}">${data.t}</h2>` +
+            TAB(
+                [['pengenalan', 'Pengenalan'], ['caramain', 'Cara Bermain'], ['link', '<i>Link</i> Permainan']],
+                tab,
+                `tampilDetailKarya('${karya}',`
+            ) +
+            konten,
+        'nav-matematika',
+        tab == 'link' ? ['k-' + karya, data.kom] : null
+    );
+}
+
+const funBtn = (game, funfact, index) =>
+    `<button onclick="bukaFunfact('${game}',${index + 1})" class="card-bg w-full text-left p-6 rounded-xl flex gap-6 items-center">${IMG(funfact[3], 'sq ic2')}<div><span class="text-sm font-bold text-gray-500 mb-1 block">${funfact[0]}</span><h4 class="text-xl font-bold text-[#eab308] mb-2">${funfact[1]}</h4><p class="text-gray-400 text-sm">${funfact[2]}</p></div></button>`;
+$('fgo-funfact').innerHTML = GAME.fgo.fun
+    .map((funfact, index) => funBtn('fgo', funfact, index))
+    .join('');
+
+function bukaSubGame(game, tab) {
+    if (game === 'fgo' && !tab) {
+        pindahHalaman('game-fgo', 'nav-entertainment');
+        switchTabFgo('pengenalan');
+        return;
+    }
+
+    gamePage(game, tab || 'pengenalan');
+}
+function gamePage(game, tab) {
+    const data = GAME[game];
+    let konten;
+
+    if (tab == 'pengenalan') {
+        konten = data.intro.map(paragraf => `<p class="mb-4 text-justify">${paragraf}</p>`).join('');
+    } else if (tab == 'info') {
+        konten = `<img src="image/${data.infoImg}" alt="Tangkapan layar akun ${data.t}" class="w-full h-auto rounded-xl mb-6 shadow-md border border-gray-700">` +
+            `<p class="mt-6 mb-2">Berikut adalah informasi mengenai akun saya:</p><ul class="list-disc ml-5 mb-4 text-[#eab308]">${data.info.map(item => `<li><span class="text-gray-300">${item}</span></li>`).join('')}</ul><p class="text-justify">${data.infoP}</p>`;
+    } else {
+        konten = `<div class="space-y-4">${data.fun.map((funfact, index) => funBtn(game, funfact, index)).join('')}</div>`;
+    }
+
+    tampil(
+        BTN("pindahHalaman('entertainment','nav-entertainment')", 'Kembali ke Games') +
+            `<div class="flex flex-col md:flex-row gap-10 items-start">${IMG(data.img, 'sq ic')}<div class="flex-1 min-w-0"><h2 class="text-4xl font-extrabold mb-4">${data.t}</h2>` +
+            TAB(gameTabs, tab, `bukaSubGame('${game}',`) +
+            konten +
+            '</div></div>',
+        'nav-entertainment',
+        tab == 'funfact' ? ['f-' + game, data.kom] : null
+    );
+}
+
+const gameTabs = [
+    ['pengenalan', 'Pengenalan'],
+    ['info', 'Info Akun'],
+    ['funfact', 'Funfact']
+];
+
+function balik(game) {
+    if (game === 'fgo') {
+        bukaSubGame('fgo');
+        switchTabFgo('funfact');
+    } else {
+        gamePage(game, 'funfact');
+    }
+}
+
+function bukaFunfact(game, index) {
+    const data = GAME[game];
+    const funfact = data.fun[index - 1];
+
+    tampil(
+        BTN(`balik('${game}')`, 'Kembali ke Daftar Funfact ' + data.s) +
+            `<div class="max-w-4xl mx-auto"><h2 class="text-3xl font-extrabold text-white mb-6">${funfact[1]}</h2>${data.det[index - 1]}</div>`,
+        'nav-entertainment'
+    );
+}
+
+function bukaRandom(jenis) {
+    const daftar = jenis == 'foto' ? FOTO : TULIS;
+    const judul = jenis == 'foto' ? 'Foto' : 'Tulisan';
+    const kelasThumbnail = jenis == 'foto' ? 'sq photo-thumb' : 'sq photo-thumb';
+    const daftarKartu = daftar
+        .map((item, index) => `<button onclick="bukaRandomDetail('${jenis}',${index})" class="card-bg rounded-xl photo-carousel-card" aria-label="Buka ${judul.toLowerCase()} ${item[1]}">${IMG(item[2], kelasThumbnail)}<span class="photo-carousel-label">${item[1]}</span></button>`)
+        .join('');
+    const daftarKonten = `<div class="photo-carousel">
+            <button onclick="geserDaftarFoto(-1)" class="photo-carousel-arrow" aria-label="Geser ke ${judul.toLowerCase()} sebelumnya">‹</button>
+            <div id="photo-carousel-track" class="photo-carousel-track">${daftarKartu}</div>
+            <button onclick="geserDaftarFoto(1)" class="photo-carousel-arrow" aria-label="Geser ke ${judul.toLowerCase()} berikutnya">›</button>
+       </div>`;
+
+    tampil(
+        BTN("pindahHalaman('entertainment','nav-entertainment')", 'Kembali') +
+            `<h2 class="${H2}">${judul}</h2>${daftarKonten}`,
+        'nav-entertainment'
+    );
+}
+
+function geserDaftarFoto(arah) {
+    const track = $('photo-carousel-track');
+    if (!track) return;
+
+    track.scrollBy({
+        left: arah * track.clientWidth,
+        behavior: 'smooth'
+    });
+}
+
+function bukaRandomDetail(jenis, index) {
+    const kembali = BTN(`bukaRandom('${jenis}')`, 'Kembali');
+
+    if (jenis == 'foto') {
+        const foto = FOTO[index];
+        const fotoSebelumnya = FOTO[index - 1];
+        const fotoBerikutnya = FOTO[index + 1];
+        const navigasiFoto = `
+            <nav class="flex justify-between items-center gap-4 mt-8" aria-label="Navigasi foto">
+                <button
+                    onclick="bukaRandomDetail('foto', ${index - 1})"
+                    class="card-bg rounded-lg px-4 py-3 font-semibold hover:text-[#eab308] disabled:opacity-40 disabled:cursor-not-allowed"
+                    ${fotoSebelumnya ? '' : 'disabled'}
+                >← Sebelumnya</button>
+                <span class="text-sm text-gray-400">${index + 1} dari ${FOTO.length}</span>
+                <button
+                    onclick="bukaRandomDetail('foto', ${index + 1})"
+                    class="card-bg rounded-lg px-4 py-3 font-semibold hover:text-[#eab308] disabled:opacity-40 disabled:cursor-not-allowed"
+                    ${fotoBerikutnya ? '' : 'disabled'}
+                >Selanjutnya →</button>
+            </nav>`;
+
+        tampil(
+            kembali +
+                `<h2 class="${H2}">${foto[0]}</h2><div class="row">${IMG(foto[2], 'photo-detail')}<div><p class="text-sm text-gray-400 mb-4">${foto[3].join('<br>')}</p><p class="text-justify">${foto[4]}</p></div></div>${navigasiFoto}`,
+            'nav-entertainment',
+            foto[5].length ? ['foto' + index, foto[5]] : null
+        );
+    } else {
+        const tulisan = TULIS[index];
+        const tulisanSebelumnya = TULIS[index - 1];
+        const tulisanBerikutnya = TULIS[index + 1];
+        const navigasiTulisan = `
+            <nav class="flex justify-between items-center gap-4 mt-8" aria-label="Navigasi tulisan">
+                <button
+                    onclick="bukaRandomDetail('tulisan', ${index - 1})"
+                    class="card-bg rounded-lg px-4 py-3 font-semibold hover:text-[#eab308] disabled:opacity-40 disabled:cursor-not-allowed"
+                    ${tulisanSebelumnya ? '' : 'disabled'}
+                >← Sebelumnya</button>
+                <span class="text-sm text-gray-400">${index + 1} dari ${TULIS.length}</span>
+                <button
+                    onclick="bukaRandomDetail('tulisan', ${index + 1})"
+                    class="card-bg rounded-lg px-4 py-3 font-semibold hover:text-[#eab308] disabled:opacity-40 disabled:cursor-not-allowed"
+                    ${tulisanBerikutnya ? '' : 'disabled'}
+                >Selanjutnya →</button>
+            </nav>`;
+
+        tampil(
+            kembali + `<h2 class="${H2}">${tulisan[0]}</h2>${tulisan[3]}${navigasiTulisan}`,
+            'nav-entertainment',
+            tulisan[4].length ? ['tulisan' + index, tulisan[4]] : null
+        );
+    }
+}
+
+/* ===== KOMENTAR & LOGIN GOOGLE ===== */
+let ckey = null;
+let csample = [];
+let user = null;
+let db = null;
+
+document.querySelectorAll('[data-l]').forEach(link => {
+    link.href = LINKS[link.dataset.l];
+});
+
+function setKom(key, sample) {
+    ckey = key;
+    csample = sample || [];
+    $('fab').hidden = !key;
+    $('kom').classList.remove('open');
+}
+
+if (FB_CONFIG) {
+    firebase.initializeApp(FB_CONFIG);
+    db = firebase.firestore();
+    firebase.auth().onAuthStateChanged(authUser => {
+        user = authUser ? { name: authUser.displayName || authUser.email } : null;
+        drawKom();
+    });
+}
+
+function login() {
+    if (!FB_CONFIG) {
+        alert('Login Google belum tersedia. Konfigurasi Firebase belum diisi.');
+        return;
+    }
+
+    return firebase.auth()
+        .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+        .catch(error => alert('Login gagal: ' + error.message));
+}
+
+function logout() {
+    return firebase.auth().signOut()
+        .catch(error => alert('Logout gagal: ' + error.message));
+}
+
+async function drawKom() {
+    if (!ckey) return;
+
+    const esc = text =>
+        String(text).replace(/[<>&]/g, character => ({
+            '<': '&lt;',
+            '>': '&gt;',
+            '&': '&amp;'
+        }[character]));
+
+    if (!FB_CONFIG || !db) {
+        $('kl').innerHTML = csample.map((text, index) =>
+            `<div class="c"><span class="av">${NAMES[index][0].toUpperCase()}</span>${NAMES[index]}<p>${text}</p></div>`
+        ).join('');
+        $('kb').innerHTML =
+            '<p class="mb-2">Login dengan akun Google diperlukan untuk berkomentar.</p>' +
+            '<p class="mb-2 text-gray-400">Login belum tersedia karena Firebase belum dikonfigurasi.</p>' +
+            '<button id="kl2" disabled>Login dengan Google</button>';
+        return;
+    }
+
+    try {
+        const mine = (await db.collection('komentar').where('halaman', '==', ckey).get())
+            .docs.map(document => document.data())
+            .sort((first, second) => first.waktu - second.waktu);
+
+        $('kl').innerHTML =
+            csample.map((text, index) =>
+                `<div class="c"><span class="av">${NAMES[index][0].toUpperCase()}</span>${NAMES[index]}<p>${text}</p></div>`
+            ).join('') +
+            mine.map(comment =>
+                `<div class="c"><span class="av">${esc(comment.nama)[0].toUpperCase()}</span>${esc(comment.nama)}<p>${esc(comment.teks)}</p></div>`
+            ).join('');
+    } catch (error) {
+        console.error('Gagal memuat komentar:', error);
+        $('kl').innerHTML = '<p class="text-red-400">Komentar gagal dimuat. Silakan coba lagi.</p>';
+    }
+
+    $('kb').innerHTML = user
+        ? `<input id="ki" placeholder="Tulis komentar..." maxlength="300"><button id="ks">Kirim</button> <button id="ko" style="background:none;color:#9ca3af;font-weight:400;text-decoration:underline">Keluar</button>`
+        : `<p class="mb-2">Login dengan akun Google diperlukan untuk berkomentar.</p><button id="kl2">Login dengan Google</button>`;
+
+    if (user) {
+        $('ks').onclick = async () => {
+            const text = $('ki').value.trim();
+            if (!text) return;
+
+            const authUser = firebase.auth().currentUser;
+            if (!authUser) {
+                user = null;
+                await drawKom();
+                return;
+            }
+
+            const comment = {
+                halaman: ckey,
+                nama: authUser.displayName || authUser.email || 'Pengguna Google',
+                teks: text,
+                waktu: Date.now()
+            };
+
+            try {
+                await db.collection('komentar').add(comment);
+                await drawKom();
+            } catch (error) {
+                console.error('Gagal mengirim komentar:', error);
+                alert('Komentar gagal dikirim: ' + error.message);
+            }
+        };
+        $('ko').onclick = logout;
+    } else {
+        $('kl2').onclick = login;
+    }
+}
+
+$('fab').onclick = () => {
+    $('kom').classList.toggle('open');
+    drawKom();
+};
+    </script>
+</body>
+</html>

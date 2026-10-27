@@ -1,0 +1,20 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /komentar/{commentId} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.auth.token.firebase.sign_in_provider == 'google.com'
+        && request.resource.data.keys().hasAll(['halaman', 'nama', 'teks', 'waktu'])
+        && request.resource.data.keys().hasOnly(['halaman', 'nama', 'teks', 'waktu'])
+        && request.resource.data.halaman is string
+        && request.resource.data.nama is string
+        && request.resource.data.teks is string
+        && request.resource.data.teks.size() > 0
+        && request.resource.data.teks.size() <= 300
+        && request.resource.data.waktu is number;
+      allow update, delete: if false;
+    }
+  }
+}
